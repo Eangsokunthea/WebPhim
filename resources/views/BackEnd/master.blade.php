@@ -9,6 +9,7 @@
   <meta name="csrf-token" content="{{csrf_token()}}"></meta>
   <title>@yield('title')</title>
 
+  <link rel="shortcut icon" href="{{asset('uploads/logo/'.$info->logo)}}" type="image/x-icon" />
   <!-- Font Awesome Icons -->
   <link rel="stylesheet" href="{{asset('/BackEnd')}}/plugins/fontawesome-free/css/all.min.css">
   <!-- Theme style -->
@@ -28,6 +29,11 @@
 
   <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/morris.js/0.5.1/morris.css">
   <link rel="stylesheet" href="//code.jquery.com/ui/1.13.1/themes/base/jquery-ui.css">
+
+  <!-- <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous"> -->
+  <!-- <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/css/bootstrap.min.css"> -->
+  
+
 
 </head>
 <body class="hold-transition sidebar-mini">
@@ -60,7 +66,6 @@
 <!-- ./wrapper -->
 
 <!-- REQUIRED SCRIPTS -->
-
 <!-- jQuery -->
 <script src="{{asset('/BackEnd')}}/plugins/jquery/jquery.min.js"></script>
 <!-- Bootstrap 4 -->
@@ -86,10 +91,179 @@
 <!-- <script src="//ajax.googleapis.com/ajax/libs/jquery/1.9.0/jquery.min.js"></script> -->
 <script src="//cdnjs.cloudflare.com/ajax/libs/raphael/2.1.0/raphael-min.js"></script>
 <script src="//cdnjs.cloudflare.com/ajax/libs/morris.js/0.5.1/morris.min.js"></script>
+
+<!-- <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script> -->
+<!-- <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/js/bootstrap.bundle.min.js"></script> -->
+
 <!-- datepicker -->
 <script src="https://code.jquery.com/ui/1.13.1/jquery-ui.js"></script>
- 
 
+<script type="text/javascript">
+  $(document).on('change','.file_image', function(){
+      var movie_id = $(this).data('movie_id');
+      var files = $("#file-"+movie_id)[0].files;
+
+      var image = document.getElementById("file-"+movie_id).files[0];
+      var form_data = new FormData();
+
+      form_data.append("file", document.getElementById("file-"+movie_id).files[0]);
+      form_data.append("movie_id", movie_id);
+
+      $.ajax({
+        url:"{{route('update-image-movie-ajax')}}",
+            method:"POST",
+            headers:{
+              'X-CSRF-TOKEN' : $('meta[name="csrf-token"]').attr('content')
+            },
+            data:form_data,
+            
+            contentType:false,
+            cache:false,
+            processData:false,
+
+            success:function()
+            {
+              location.reload();
+              $('#success_image').html('<span class="text-success">Cập nhật thành công</span>');
+            }
+      });
+  });
+</script>
+
+<!-- ajax model -->
+<!-- <script>
+    $(document).ready(function() {
+        $(document).on('click', '.editbtn', function(){
+          var movie_id = $(this).val();
+          $('#editModal').modal('show');
+          $.ajax({
+            url:"/edit-movie/"+movie_id,
+            method:"GET",
+            success:function(response)
+            {
+              console.log(response.movie.title);
+            }
+        });
+
+        });
+    });
+</script>   -->
+
+<!-- danh muc ajax -->
+<script type='text/javascript'>
+    $('.category_choose').change(function(){
+        var category_id = $(this).val();
+        var movie_id = $(this).attr('id');
+        $.ajax({
+            url:"{{route('category-choose')}}",
+            method:"GET",
+            data:{category_id:category_id, movie_id:movie_id},
+            success:function(data)
+            {
+              // $('#show_movie').html(data);
+              alert('Thay đổi thành công.');
+            }
+        });
+    })
+</script>
+<!-- quoc gia ajax -->
+<script type='text/javascript'>
+    $('.country_choose').change(function(){
+        var country_id = $(this).val();
+        var movie_id = $(this).attr('id');
+        $.ajax({
+            url:"{{route('country-choose')}}",
+            method:"GET",
+            data:{country_id:country_id, movie_id:movie_id},
+            success:function(data)
+            {
+              alert('Thay đổi thành công.');
+            }
+        });
+    })
+</script>
+<!-- phude ajax -->
+<script type='text/javascript'>
+    $('.phude_choose').change(function(){
+        var phude_val = $(this).val();
+        var movie_id = $(this).attr('id');
+        $.ajax({
+            url:"{{route('phude-choose')}}",
+            method:"GET",
+            data:{phude_val:phude_val, movie_id:movie_id},
+            success:function(data)
+            {
+              alert('Thay đổi thành công.');
+            }
+        });
+    })
+</script>
+<!-- trang thai ajax -->
+<script type='text/javascript'>
+    $('.trangthai_choose').change(function(){
+        var trangthai_val = $(this).val();
+        var movie_id = $(this).attr('id');
+        $.ajax({
+            url:"{{route('trangthai-choose')}}",
+            method:"GET",
+            data:{trangthai_val:trangthai_val, movie_id:movie_id},
+            success:function(data)
+            {
+              alert('Thay đổi thành công.');
+            }
+        });
+    })
+</script>
+<!-- phimhot ajax -->
+<script type='text/javascript'>
+    $('.phimhot_choose').change(function(){
+        var phimhot_val = $(this).val();
+        var movie_id = $(this).attr('id');
+        $.ajax({
+            url:"{{route('phimhot-choose')}}",
+            method:"GET",
+            data:{phimhot_val:phimhot_val, movie_id:movie_id},
+            success:function(data)
+            {
+              alert('Thay đổi thành công.');
+            }
+        });
+    })
+</script>
+<!-- thuocphim ajax -->
+<script type='text/javascript'>
+    $('.thuocphim_choose').change(function(){
+        var thuocphim_val = $(this).val();
+        var movie_id = $(this).attr('id');
+        $.ajax({
+            url:"{{route('thuocphim-choose')}}",
+            method:"GET",
+            data:{thuocphim_val:thuocphim_val, movie_id:movie_id},
+            success:function(data)
+            {
+              alert('Thay đổi thành công.');
+            }
+        });
+    })
+</script>
+<!-- dinhdang ajax -->
+<script type='text/javascript'>
+    $('.resolution_choose').change(function(){
+        var resolution_val = $(this).val();
+        var movie_id = $(this).attr('id');
+        $.ajax({
+            url:"{{route('resolution-choose')}}",
+            method:"GET",
+            data:{resolution_val:resolution_val, movie_id:movie_id},
+            success:function(data)
+            {
+              alert('Thay đổi thành công.');
+            }
+        });
+    })
+</script>
+ 
+<!-- data table -->
 <script>
   $(function () {
     $("#example1").DataTable({
@@ -107,7 +281,7 @@
     });
   });
 </script>
-
+<!-- slug  -->
 <script type="text/javascript">
  
   function ChangeToSlug()
@@ -142,7 +316,8 @@
       }
 
 </script>
-<script>
+
+<script type="text/javascript">
     $(function(){
       $(document).on('click', '#delete', function(e){
         e.preventDefault();
@@ -168,6 +343,7 @@
       });
     });  
 </script>
+
 <script type="text/javascript">
     $('.order_position').sortable({
         placeholder : 'ui-state-highlight',
@@ -190,6 +366,7 @@
         }
     })
 </script>
+
 <script type="text/javascript">
   $('.select-year').change(function(){
     var year = $(this).find(':selected').val();
@@ -208,6 +385,7 @@
     });
   })
 </script>
+
 <script type="text/javascript">
   $('.select-season').change(function(){
     var season = $(this).find(':selected').val();
@@ -272,3 +450,5 @@
 
 </body>
 </html>
+
+

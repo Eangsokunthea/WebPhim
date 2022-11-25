@@ -22,6 +22,11 @@
                 <div class="section-bar clearfix">
                     <h1 class="section-title"><span>{{$count_slug->title}}</span></h1>
                 </div>
+                <div class="section-bar clearfix">
+                    <div class="row">
+                        @include('FrontEnd.pages.include.locphim')
+                    </div>
+                </div>
                 <div class="halim_box">
                     @foreach($movie as $key => $mov)
                     <article class="col-md-3 col-sm-3 col-xs-6 thumb grid-item post-37606">
@@ -44,16 +49,11 @@
                                     @endif
                                 </span>
                                 <span class="episode"><i class="fa fa-play" aria-hidden="true"></i>
+                                    {{$mov->episode_count}}/{{$mov->sotap}} |
                                     @if($mov->phude==0)
-                                        Phụ đề 
-                                        @if($mov->season!=0)
-                                            - Season {{$mov->season}}
-                                        @endif
+                                        Phụ đề
                                     @else
                                         Thuyết minh
-                                        @if($mov->season!=0)
-                                            - Season {{$mov->season}}
-                                        @endif
                                     @endif
                                 </span> 
                                
@@ -61,7 +61,17 @@
                                 <div class="halim-post-title-box">
                                     <div class="halim-post-title ">
                                     <p class="entry-title">{{$mov->title}}</p>
-                                    <p class="original_title">{{$mov->name_eng}}</p>
+                                    <p class="original_title">{{$mov->name_eng}}
+                                        @if($mov->phude==0)
+                                            @if($mov->season!=0)
+                                                - season{{$mov->season}}
+                                            @endif
+                                        @else
+                                            @if($mov->season!=0)
+                                                - season{{$mov->season}}
+                                            @endif
+                                        @endif
+                                    </p>
                                     </div>
                                 </div>
                             </a>

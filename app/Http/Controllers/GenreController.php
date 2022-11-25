@@ -38,14 +38,31 @@ class GenreController extends Controller
      */
     public function store(Request $request)
     {
-        $data = $request->all();
+        // $data = $request->all();
+        $data = $request->validate(
+            [
+                'tentheloai' => 'required|unique:theloai|max:255',
+                'slug_theloai' => 'required|unique:theloai|max:255',
+                'tukhoa' => 'required|max:255',
+                'mota'=> 'required|max:255',
+                'kichhoat' => 'required',
+            ],
+            [
+                'slug_theloai.unique' => 'Tên thể loại đã có, xin điền tên khác',
+                'tentheloai.unique' => 'Slug thể loại đã có, xin điền slug khác',
+                'tentheloai.required' => 'Tên thể loại phải có',
+                'tukhoa.required' => 'Từ khóa thể loại phải có',
+                'mota.required' => 'Mô tả thể loại phải có',
+            ]
+        );
         $genre = new Genre();
         $genre->title = $data['title'];
         $genre->slug = $data['slug'];
         $genre->description = $data['description'];
         $genre->status = $data['status'];
         $genre->save();
-        return redirect()->back();
+        toastr()->success('Thành công','Thêm thể loại phim thành công.');
+        return Redirect::to('/genre');
 
     }
 
@@ -83,14 +100,30 @@ class GenreController extends Controller
      */
     public function update(Request $request, $id)
     {
-        $data = $request->all();
+        // $data = $request->all();
+        $data = $request->validate(
+            [
+                'tentheloai' => 'required|unique:theloai|max:255',
+                'slug_theloai' => 'required|unique:theloai|max:255',
+                'tukhoa' => 'required|max:255',
+                'mota'=> 'required|max:255',
+                'kichhoat' => 'required',
+            ],
+            [
+                'slug_theloai.unique' => 'Tên thể loại đã có, xin điền tên khác',
+                'tentheloai.unique' => 'Slug thể loại đã có, xin điền slug khác',
+                'tentheloai.required' => 'Tên thể loại phải có',
+                'tukhoa.required' => 'Từ khóa thể loại phải có',
+                'mota.required' => 'Mô tả thể loại phải có',
+            ]
+        );
         $genre = Genre::find($id);
         $genre->title = $data['title'];
         $genre->slug = $data['slug'];
         $genre->description = $data['description'];
         $genre->status = $data['status'];
         $genre->save();
-        // return redirect()->back();
+        toastr()->success('Thành công','Update thể loại phim thành công.');
         return Redirect::to('/genre')->with('message', 'Update Genre thành công');
     }
 
@@ -103,6 +136,7 @@ class GenreController extends Controller
     public function destroy($id)
     {
         Genre::find($id)->delete();
+        toastr()->success('Thành công','Xóa thể loại phim thành công.');
         return redirect()->back();
 
     }

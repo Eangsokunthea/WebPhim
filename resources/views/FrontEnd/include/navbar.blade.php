@@ -22,39 +22,39 @@
             <div class="collapse navbar-collapse" id="halim">
                 <div class="menu-menu_1-container">
                     <ul id="menu-menu_1" class="nav navbar-nav navbar-left">
-                        <li class="current-menu-item active"><a title="Trang Chủ" href="{{route('homepage')}}">Trang Chủ</a></li>
-                        @foreach($category as $key => $cate)
-                        <li class="mega"><a title="{{$cate->title}}" href="{{route('category', [$cate->slug])}}">{{$cate->title}}</a></li>
-                        @endforeach
+                        <li class="current-menu-item active"><a title="Trang Chủ" href="{{route('homepage')}}">@lang('lang.home')</a></li>
                         <li class="mega dropdown">
-                            <a title="Thể Loại" href="#" data-toggle="dropdown" class="dropdown-toggle" aria-haspopup="true">Thể Loại <span class="caret"></span></a>
+                            <a title="Thể Loại" href="#" data-toggle="dropdown" class="dropdown-toggle" aria-haspopup="true">@lang('lang.genre') <span class="caret"></span></a>
                             <ul role="menu" class=" dropdown-menu">
-                                @foreach($genre as $key => $genres)
+                                @foreach($genre_home as $key => $genres)
                                 <li><a title="{{$genres->title}}" href="{{route('genre', [$genres->slug])}}">{{$genres->title}}</a></li>
                                 @endforeach
                             </ul>
                         </li>
                         <li class="mega dropdown">
-                            <a title="Quốc Gia" href="#" data-toggle="dropdown" class="dropdown-toggle" aria-haspopup="true">Quốc Gia <span class="caret"></span></a>
+                            <a title="Quốc Gia" href="#" data-toggle="dropdown" class="dropdown-toggle" aria-haspopup="true">@lang('lang.country') <span class="caret"></span></a>
                             <ul role="menu" class=" dropdown-menu">
-                                @foreach($country as $key => $counties)
+                                @foreach($country_home as $key => $counties)
                                 <li><a title="{{$counties->title}}" href="{{route('country', [$counties->slug])}}">{{$counties->title}}</a></li>
                                 @endforeach
                             </ul>
                         </li>
                         <li class="mega dropdown">
-                            <a title="Năm Phim" href="#" data-toggle="dropdown" class="dropdown-toggle" aria-haspopup="true">Năm phim <span class="caret"></span></a>
+                            <a title="Năm Phim" href="#" data-toggle="dropdown" class="dropdown-toggle" aria-haspopup="true">@lang('lang.year') <span class="caret"></span></a>
                             <ul role="menu" class=" dropdown-menu">
                                 @for($year=2000;$year<=2022;$year++)
                                 <li><a title="{{$year}}" href="{{url('nam/'.$year)}}">{{$year}}</a></li>
                                 @endfor
                             </ul>
                         </li>
+                        @foreach($category_home as $key => $cate)
+                        <li class="mega"><a title="{{$cate->title}}" href="{{route('category', [$cate->slug])}}">{{$cate->title}}</a></li>
+                        @endforeach
                     </ul>
                 </div>
-                <ul class="nav navbar-nav navbar-left" style="background:#000;">
+                <!-- <ul class="nav navbar-nav navbar-left" style="background:#000;">
                     <li><a href="#" onclick="locphim()" style="color: #ffed4d;">Lọc Phim</a></li>
-                </ul>
+                </ul> -->
             </div>
         </nav>
         <div class="collapse navbar-collapse" id="search-form">

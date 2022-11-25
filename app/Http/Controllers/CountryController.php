@@ -38,14 +38,31 @@ class CountryController extends Controller
      */
     public function store(Request $request)
     {
-        $data = $request->all();
+        // $data = $request->all();
+        $data = $request->validate(
+            [
+                'title' => 'required|unique:countries|max:255',
+                'slug' => 'required|unique:countries|max:255',
+                'description' => 'required|max:255',
+                'status' => 'required',
+            ],
+            [
+                'title.unique' => 'Tên quốc gia đã có, xin điền tên khác',
+                'slug.unique' => 'Slug quốc gia đã có, xin điền slug khác',
+                'title.required' => 'Tên quốc gia phải có',
+                'slug.required' => 'Từ khóa quốc gia phải có',
+                'description.required' => 'Mô tả quốc gia phải có',
+                'status.required' => 'Kícch hoạt quốc gia phải có',
+            ]
+        );
         $country = new Country();
         $country->title = $data['title'];
         $country->slug = $data['slug'];
         $country->description = $data['description'];
         $country->status = $data['status'];
         $country->save();
-        return redirect()->back();
+        toastr()->success('Thành công','Thêm quốc gia phim thành công.');
+        return Redirect::to('/country');
 
     }
 
@@ -83,14 +100,30 @@ class CountryController extends Controller
      */
     public function update(Request $request, $id)
     {
-        $data = $request->all();
+        // $data = $request->all();
+        $data = $request->validate(
+            [
+                'title' => 'required|unique:countries|max:255',
+                'slug' => 'required|unique:countries|max:255',
+                'description' => 'required|max:255',
+                'status' => 'required',
+            ],
+            [
+                'title.unique' => 'Tên quốc gia đã có, xin điền tên khác',
+                'slug.unique' => 'Slug quốc gia đã có, xin điền slug khác',
+                'title.required' => 'Tên quốc gia phải có',
+                'slug.required' => 'Từ khóa quốc gia phải có',
+                'description.required' => 'Mô tả quốc gia phải có',
+                'status.required' => 'Kícch hoạt quốc gia phải có',
+            ]
+        );
         $country = Country::find($id);
         $country->title = $data['title'];
         $country->slug = $data['slug'];
         $country->description = $data['description'];
         $country->status = $data['status'];
         $country->save();
-       
+        toastr()->success('Thành công','Update quốc gia phim thành công.');
         return Redirect::to('/country')->with('message', 'Update Country thành công');
     }
 
@@ -103,6 +136,7 @@ class CountryController extends Controller
     public function destroy($id)
     {
         Country::find($id)->delete();
+        toastr()->success('Thành công','Xóa quốc gia phim thành công.');
         return redirect()->back();
 
     }

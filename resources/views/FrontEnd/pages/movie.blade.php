@@ -29,7 +29,6 @@
         <main id="main-contents" class="col-xs-12 col-sm-12 col-md-8">
             <section id="content" class="test">
                 <div class="clearfix wrap-content">
-                
                     <div class="halim-movie-wrapper">
                     <div class="title-block">
                         <div id="bookmark" class="bookmark-img-animation primary_ribbon" data-id="38424">
@@ -130,8 +129,49 @@
                                         Đang cập nhập    
                                     @endif    
                                 </li>
+                                
+                                <ul class="list-inline rating"  title="Average Rating">
+
+                                    @for($count=1; $count<=5; $count++)
+
+                                    @php
+
+                                        if($count<=$rating){ 
+                                        $color = 'color:#ffcc00;'; //mau vang
+                                        }
+                                        else {
+                                        $color = 'color:#ccc;'; //mau xam
+                                        }
+                                    
+                                    @endphp
+                                    
+                                    <li title="star_rating" 
+
+                                    id="{{$movie->id}}-{{$count}}" 
+                                    
+                                    data-index="{{$count}}"  
+                                    data-movie_id="{{$movie->id}}" 
+
+                                    data-rating="{{$rating}}" 
+                                    class="rating" 
+                                    style="cursor:pointer; {{$color}} 
+
+                                    font-size:30px;">&#9733;</li>
+
+                                    @endfor
+
+                                </ul>
+                                <span class="total_rating"  title="Average Rating"> Đánh giá : {{$rating}}/{{$count_total}} lượt</span>
+
                             </ul>
-                            <div class="movie-trailer hidden"></div>
+                            
+                            <div class="movie-trailer">
+                                @php
+                                    $current_url = Request::url();
+                                @endphp
+                                <div class="fb-like" data-href="{{$current_url}}" data-width="" data-layout="button_count" data-action="like" data-size="large" data-share="true"></div>
+                                <div class="fb-save" data-uri="{{$current_url}}" data-size="large"></div>
+                            </div>
                         </div>
                     </div>
                     </div>
@@ -212,6 +252,7 @@
                     </div>
                     <div id="halim_related_movies-2" class="owl-carousel owl-theme related-film">
                         @foreach($related as $key => $hot)
+                            @foreach($phimhot as $key => $hot)
                         <article class="thumb grid-item post-38498">
                             <div class="halim-item">
                                 <a class="halim-thumb" href="{{route('movie',[$hot->slug])}}" title="{{$hot->title}}">
@@ -231,28 +272,34 @@
                                             Trailer    
                                         @endif
                                     </span><span class="episode"><i class="fa fa-play" aria-hidden="true"></i>
+                                        {{$hot->episode_count}}/{{$hot->sotap}} |
                                         @if($hot->phude==0)
-                                            Phụ đề 
-                                            @if($hot->season!=0)
-                                                - Season {{$hot->season}}
-                                            @endif
+                                            Phụ đề
                                         @else
                                             Thuyết minh
-                                            @if($hot->season!=0)
-                                                - Season {{$hot->season}}
-                                            @endif
                                         @endif
                                     </span> 
                                     <div class="icon_overlay"></div>
                                     <div class="halim-post-title-box">
                                     <div class="halim-post-title ">
                                         <p class="entry-title">{{$hot->title}}</p>
-                                        <p class="original_title">{{$hot->name_eng}}</p>
+                                        <p class="original_title">{{$hot->name_eng}}
+                                            @if($hot->phude==0)
+                                                @if($hot->season!=0)
+                                                    - season{{$hot->season}}
+                                                @endif
+                                            @else
+                                                @if($hot->season!=0)
+                                                    - season{{$hot->season}}
+                                                @endif
+                                            @endif
+                                        </p>
                                     </div>
                                     </div>
                                 </a>
                             </div>
                         </article>
+                            @endforeach
                         @endforeach
                     </div>
                     <script>

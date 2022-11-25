@@ -8,15 +8,23 @@
     <div class="card-body">
         <a href="{{route('genre.index')}}" class="btn btn-primary">Liệt kê thể loại</a>
 
-        @if(session()->has('message'))
+        <!-- @if(session()->has('message'))
             <div class="alert alert-success">
                 <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
                 <strong>{{session()->get('message')}}</strong>
             </div>
-        @endif  
+        @endif   -->
         
         <h3 class="text-center">Quản lý thể loại</h3>
-        
+        @if($errors->any())
+            <div class="alert alert-danger">
+                <ul>
+                    @foreach($errors->all() as $error)
+                        <li>{{$error}} </li>
+                    @endforeach
+                </ul>
+            </div>
+        @endif
         <div class="offset-2 col-md-8 my-lg-8">
             @if(!isset($genre))
                 {!! Form::open(['route' => 'genre.store', 'method'=>'POST']) !!}

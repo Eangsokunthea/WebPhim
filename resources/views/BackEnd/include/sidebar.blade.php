@@ -4,7 +4,7 @@
     <a href="{{asset('/home')}}" class="brand-link">
       <img src="{{asset('/BackEnd')}}/dist/img/AdminLTELogo.png" alt="AdminLTE Logo" class="brand-image img-circle elevation-3"
            style="opacity: .8">
-      <span class="brand-text font-weight-light">Admin Food Order</span>
+      <span class="brand-text font-weight-light">Admin Web Xem Phim</span>
     </a>
 
     <!-- Sidebar -->
@@ -22,7 +22,23 @@
       <!-- Sidebar Menu -->
       <nav class="mt-2">
         <ul class="nav nav-pills nav-sidebar flex-column" data-widget="treeview" role="menu" data-accordion="false">
-          
+          <li class="nav-item has-treeview">
+            <a href="{{route('info.index')}}" class="nav-link">
+            <i class="nav-icon fas fa-users"></i>
+              <p>
+                  Thông tin website
+                <!-- <i class="right fas fa-angle-left"></i> -->
+              </p>
+            </a>
+            <!-- <ul class="nav nav-treeview">
+              <li class="nav-item">
+                <a href="{{route('genre.index')}}" class="nav-link">
+                  <i class="far fa-edit nav-icon"></i>
+                  <p>Manage Thẻ loại</p>
+                </a>
+              </li>
+            </ul> -->
+          </li>
           <li class="nav-item has-treeview">
             <a href="#" class="nav-link">
             <i class="nav-icon fas fa-users"></i>
@@ -33,7 +49,7 @@
             </a>
             <ul class="nav nav-treeview">
               <li class="nav-item">
-                <a href="{{route('genre.create')}}" class="nav-link">
+                <a href="{{route('genre.index')}}" class="nav-link">
                   <i class="far fa-edit nav-icon"></i>
                   <p>Manage Thẻ loại</p>
                 </a>
@@ -50,7 +66,7 @@
             </a>
             <ul class="nav nav-treeview">
               <li class="nav-item">
-                <a href="{{route('category.create')}}" class="nav-link">
+                <a href="{{route('category.index')}}" class="nav-link">
                   <i class="far fa-edit nav-icon"></i>
                   <p>Manage Doanh mục</p>
                 </a>
@@ -67,7 +83,7 @@
             </a>
             <ul class="nav nav-treeview">
               <li class="nav-item">
-                <a href="{{route('country.create')}}" class="nav-link">
+                <a href="{{route('country.index')}}" class="nav-link">
                   <i class="far fa-edit nav-icon"></i>
                   <p>Manage Quốc gia</p>
                 </a>
@@ -84,7 +100,7 @@
             </a>
             <ul class="nav nav-treeview">
               <li class="nav-item">
-                <a href="{{route('movie.create')}}" class="nav-link">
+                <a href="{{route('movie.index')}}" class="nav-link">
                   <i class="far fa-edit nav-icon"></i>
                   <p>Manage Phim</p>
                 </a>
@@ -101,7 +117,7 @@
             </a>
             <ul class="nav nav-treeview">
               <li class="nav-item">
-                <a href="{{route('episode.create')}}" class="nav-link">
+                <a href="{{route('episode.index')}}" class="nav-link">
                   <i class="far fa-edit nav-icon"></i>
                   <p>Manage Tập Phim</p>
                 </a>

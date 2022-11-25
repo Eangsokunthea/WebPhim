@@ -7,16 +7,28 @@
   
     <div class="card-body">
         <a href="{{route('category.create')}}" class="btn btn-primary">Thêm danh mục</a>
-
-        @if(session()->has('message'))
+        
+        <!-- @error('title')
+            <div class="alert alert-danger">{{ $message }}</div>
+        @enderror -->
+        <!-- @if(session()->has('message'))
             <div class="alert alert-success">
                 <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
                 <strong>{{session()->get('message')}}</strong>
             </div>
-        @endif  
+        @endif   -->
         
 
         <h3 class="text-center">Quản lý doanh mục</h3>
+        @if($errors->any())
+            <div class="alert alert-danger">
+                <ul>
+                    @foreach($errors->all() as $error)
+                        <li>{{$error}} </li>
+                    @endforeach
+                </ul>
+            </div>
+        @endif
         
         <table id="example1" class="table table-bordered table-striped">
             <thead>

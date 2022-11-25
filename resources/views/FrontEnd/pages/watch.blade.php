@@ -127,6 +127,7 @@
                     </div>
                     <div id="halim_related_movies-2" class="owl-carousel owl-theme related-film">
                         @foreach($related as $key => $hot)
+                            @foreach($phimhot as $key => $hot)
                         <article class="thumb grid-item post-38498">
                             <div class="halim-item">
                                 <a class="halim-thumb" href="{{route('movie',[$hot->slug])}}" title="{{$hot->title}}">
@@ -146,28 +147,36 @@
                                             Trailer    
                                         @endif
                                     </span><span class="episode"><i class="fa fa-play" aria-hidden="true"></i>
+                                    
+                                        {{$hot->episode_count}}/{{$hot->sotap}} |
+                                      
                                         @if($hot->phude==0)
-                                            Phụ đề 
-                                            @if($hot->season!=0)
-                                                - Season {{$hot->season}}
-                                            @endif
+                                            Phụ đề
                                         @else
                                             Thuyết minh
-                                            @if($hot->season!=0)
-                                                - Season {{$hot->season}}
-                                            @endif
                                         @endif
                                     </span> 
                                     <div class="icon_overlay"></div>
                                     <div class="halim-post-title-box">
                                     <div class="halim-post-title ">
                                         <p class="entry-title">{{$hot->title}}</p>
-                                        <p class="original_title">{{$hot->name_eng}}</p>
+                                        <p class="original_title">{{$hot->name_eng}}
+                                            @if($hot->phude==0)
+                                                @if($hot->season!=0)
+                                                    - season{{$hot->season}}
+                                                @endif
+                                            @else
+                                                @if($hot->season!=0)
+                                                    - season{{$hot->season}}
+                                                @endif
+                                            @endif
+                                        </p>
                                     </div>
                                     </div>
                                 </a>
                             </div>
                         </article>
+                            @endforeach
                         @endforeach
                     </div>
                     <script>

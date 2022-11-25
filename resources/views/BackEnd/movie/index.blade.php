@@ -8,13 +8,6 @@
     <div class="card-body">
         <a href="{{route('movie.create')}}" class="btn btn-primary">Thêm phim</a>
 
-        @if(session()->has('message'))
-            <div class="alert alert-success">
-                <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
-                <strong>{{session()->get('message')}}</strong>
-            </div>
-        @endif  
-
         <h3 class="text-center">Quản lý phim</h3>
         
         <table id="example1" class="table table-bordered table-striped">
@@ -22,27 +15,28 @@
                 <tr>
                     <th>#</th>
                     <th>Tên phim</th>
+                    <th>Tập phim</th>
                     <!-- <th>Tags</th> -->
                     <!-- <th>Thời lượng phim</th> -->
-                    <th>Trailer</th>
+                    <!-- <th>Trailer</th> -->
                     <!-- <th>Tên tiếng anh</th> -->
                     <th>Hình ảnh</th>
                     <!-- <th>Phim Hot</th> -->
-                    <th>Định dạng</th>
-                    <th>Phụ đề</th>
+                    <!-- <th>Định dạng</th> -->
+                    <!-- <th>Phụ đề</th> -->
                     <!-- <th>Mô tả</th> -->
                     <!-- <th>Slug</th> -->
-                    <th>Trạng thái</th>
-                    <!-- <th>Danh mục</th> -->
-                    <th>Thuộc Phim</th>
+                    <!-- <th>Trạng thái</th> -->
+                    <th>Danh mục</th>
+                    <!-- <th>Thuộc Phim</th> -->
+                    <th>Quốc gia</th>
                     <th>Thẻ loại</th>
-                    <!-- <th>Quốc gia</th> -->
                     <th>Số tập</th>
                     <!-- <th>Ngày tạo</th> -->
                     <th>Ngày cập nhật</th>
                     <th>Năm phim</th>
                     <th>Top view</th>
-                    <th>Season</th>
+                    <!-- <th>Season</th> -->
                     <th>Quản lý</th>
                 </tr>
             </thead>
@@ -52,6 +46,7 @@
                 <tr>
                     <td>{{$i++}}</td>
                     <td>{{$cate->title}}</td>
+                    <td><a href="{{route('add-episode',[$cate->id])}}" class="btn btn-danger btn-sm">Thêm tập phim</a></td>
                     <!-- <td>
                         @if($cate->tags!=NULL)
                             {{substr($cate->tags,0,50)}}...
@@ -60,17 +55,26 @@
                         @endif
                     </td> -->
                     <!-- <td>{{$cate->thoiluong}}</td> -->
-                    <td>{{$cate->trailer}}</td>
+                    <!-- <td>{{$cate->trailer}}</td> -->
                     <!-- <td>{{$cate->name_eng}}</td> -->
-                    <td><img src="{{asset('uploads/movie/'.$cate->image)}}" width="60%"></td>
-                    <!-- <td>
-                        @if($cate->phim_hot==0)
-                            Không
-                        @else
-                            Có  
-                        @endif    
-                    </td> -->
                     <td>
+                        <img src="{{asset('uploads/movie/'.$cate->image)}}" width="90">
+                        <input type="file" id="file-{{$cate->id}}" data-movie_id="{{$cate->id}}" class="form-control-file file_image" accept="image/*">
+                        <span id="success_image"></span>
+                    </td>
+                    
+                    <!-- <td>    
+                        <select id="{{$cate->id}}" class="form-control phimhot_choose">
+                            @if($cate->phim_hot==0)
+                                <option value="1">Hot</option>
+                                <option selected value="0">Không</option>
+                            @else
+                                <option selected value="1">Hot</option>
+                                <option value="0">Không</option>
+                            @endif
+                        </select>
+                    </td> -->
+                    <!-- <td>
                         @if($cate->resolution==0)
                             HD
                         @elseif($cate->resolution==1)
@@ -84,99 +88,185 @@
                         @else
                             Trailer    
                         @endif    
-                    </td>
-                    <td>
-                        @if($cate->phude==0)
-                            Phụ đề
-                        @else
-                            Thuyết minh
-                        @endif    
-                    </td>
+                    </td> -->
+                    
+                    
+                    <!-- <td>    
+                        <select id="{{$cate->id}}" class="form-control phude_choose">
+                            @if($cate->phude==0)
+                                <option value="1">Thuyết minh</option>
+                                <option selected value="0">Phụ đề</option>
+                            @else
+                                <option selected value="1">Thuyết minh</option>
+                                <option value="0">Phụ đề</option>
+                            @endif
+                        </select>
+                    </td> -->
                     <!-- <td>{{$cate->description}}</td> -->
                     <!-- <td>{{$cate->slug}}</td> -->
+                   
+                    <!-- <td>    
+                        <select id="{{$cate->id}}" class="form-control trangthai_choose">
+                            @if($cate->status==0)
+                                <option value="1">Hiển thị</option>
+                                <option selected value="0">Không</option>
+                            @else
+                                <option selected value="1">Hiển thị</option>
+                                <option value="0">Không</option>
+                            @endif
+                        </select>
+                    </td> -->
                     <td>
-                        @if($cate->status)
-                            Hiển thị
-                        @else
-                            Không hiển thị    
-                        @endif    
+                        {!! Form::select('category_id', $category , isset($cate) ? $cate->category->id : '', ['class'=>'form-control category_choose', 'id'=> $cate->id]) !!}
                     </td>
-                    <!-- <td>{{$cate->category->title}}</td> -->
+                    <!-- <td>    
+                        <select id="{{$cate->id}}" class="form-control thuocphim_choose">
+                            @if($cate->thuocphim=='phimbo')
+                                <option value="phimle">Phim lẻ</option>
+                                <option selected value="phimbo">Phim bộ</option>
+                            @else
+                                <option selected value="phimle">Phim lẻ</option>
+                                <option value="phimbo">Phim bộ</option>
+                            @endif
+                        </select>
+                    </td> -->
                     <td>
-                        @if($cate->thuocphim=='phimle')
-                            Phim lẻ
-                        @else
-                            Phim bộ
-                        @endif
+                        {!! Form::select('country_id', $country , isset($cate) ? $cate->country->id : '', ['class'=>'form-control country_choose', 'id'=> $cate->id]) !!}
                     </td>
                     <td>
                         @foreach($cate->movie_genre as $gen)
                             <span class="badge badge-dark">{{$gen->title}}</span>
                         @endforeach
                     </td>
-                    <!-- <td>{{$cate->country->title}}</td> -->
-                    <td>{{$cate->sotap}}</td>
+                    <td>{{$cate->episode_count}}/{{$cate->sotap}}tập</td>
                     <!-- <td>{{$cate->ngaytao}}</td> -->
                     <td>{{$cate->ngaycapnhat}}</td>
                     <td>
                         <form method="POST">
                             @csrf 
-                             
-                            {!! Form::selectYear('year',2000,2022, isset($cate->year) ? $cate->year : '', ['class'=>'select-year', 'id'=>$cate->id]) !!}
+                            {!! Form::selectYear('year',2000,2022, isset($cate->year) ? $cate->year : '', ['class'=>'select-year', 'id'=>$cate->id,'placeholder'=>'--Năm phim--']) !!}
                         </form>
                         
                     </td>
                     <td>
-                        {!! Form::select('topview', ['0'=>'Ngày', '1'=>'Tuần','2'=>'Tháng'], isset($cate->topview) ? $cate->topview : '', ['class'=>'select-topview', 'id'=>$cate->id]) !!}
-                        <!-- <form method="POST">
-                            @csrf
-                            <select name="top_view" class="topview">
-                                @if($cate->top_view==1)
-                                    <option value="0" id="{{$cate->id}}">Ngày</option>
-                                    <option value="1" selected id="{{$cate->id}}">Tuần</option>
-                                    <option value="2" id="{{$cate->id}}">Tháng</option>
-                                    <option value="3" id="{{$cate->id}}">Năm</option>
-                                @elseif($cate->top_view==2)
-                                    <option value="0" id="{{$cate->id}}">Ngày</option>
-                                    <option value="1" id="{{$cate->id}}">Tuần</option>
-                                    <option value="2" selected id="{{$cate->id}}">Tháng</option>
-                                    <option value="3" id="{{$cate->id}}">Năm</option>
-                                @elseif($cate->top_view==3)
-                                    <option value="0" id="{{$cate->id}}">Ngày</option>
-                                    <option value="1" selected id="{{$cate->id}}">Tuần</option>
-                                    <option value="2" id="{{$cate->id}}">Tháng</option>
-                                    <option value="3" selected id="{{$cate->id}}">Năm</option>
-                                @else
-                                    <option value="0" selected id="{{$cate->id}}">Ngày</option>
-                                    <option value="1" selected id="{{$cate->id}}">Tuần</option>
-                                    <option value="2" id="{{$cate->id}}">Tháng</option>
-                                    <option value="3" id="{{$cate->id}}">Năm</option>
-                                @endif
-                            </select>
-                        </form> -->
+                        {!! Form::select('topview', ['0'=>'Ngày', '1'=>'Tuần','2'=>'Tháng'], isset($cate->topview) ? $cate->topview : '', ['class'=>'select-topview', 'id'=>$cate->id,'placeholder'=>'--View--']) !!}
                     </td>
 
-                    <td>
+                    <!-- <td>
                         <form method="POST">
                             @csrf 
                              
                             {!! Form::selectRange('season',0,20, isset($cate->season) ? $cate->season : '0', ['class'=>'select-season', 'id'=>$cate->id]) !!}
                         </form>
-                        <!-- {!! Form::selectRange('season',0,20, isset($cate->season) ? $cate->season : '0', ['class'=>'select-season', 'id'=>$cate->id]) !!} -->
 
-                    </td>
+                    </td> -->
                     <td>
                         {!! Form::open(['method'=>'DELETE','route'=>['movie.destroy',$cate->id],'onsubmit'=>'return confirm("Xóa hay không?")']) !!}
                             {!! Form::submit('Xóa', ['class'=>'btn btn-danger']) !!}
                         {!! Form::close() !!}
+                        
                         <a href="{{route('movie.edit',$cate->id)}}"class="btn btn-warning">Sửa</a>
+                        <!-- <a data-toggle="modal" data-target="#movie_modal">
+                            <i class="fa fa-eye" style="color: #2196f3;"></i>
+                        </a> -->
+                        <!-- <button type="button" value="{{$cate->id}}" class="btn btn-primary editbtn btn-sm">Edit</button> -->
+                        <!-- <a href="" class="btn btn-sm btn-primary"><i class="la la-pencil"></i></a>
+                        <a href="" class="btn btn-sm btn-danger"><i class="la la-trash-o"></i></a> -->
+
                     </td>
                 </tr>
               @endforeach
             </tbody>
+             
             
         </table>
 
     </div>
+    <!-- Modal -->
+    <!-- <div class="modal fade" id="editModal" data-backdrop="static" data-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+        <div class="modal-dialog modal-xl">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <div class="col-md-12">
+                        <div class="card">
+                            <div class="card-body">
+                                <h3 style="text-align: center;">
+                                    Quản lý phim
+                                </h3>
+                                <form action="{{url('update-movie')}}" method="POST" enctype="multipart/form-data">
+                                    @csrf
+                                    <input type="hidden" name="movie_id" id="movie_id" value="">
+                                    <div class="row">
+                                        <div class="col-sm-3">
+                                            <div class="form-group">
+                                                <label for="">Tên phim</label>
+                                                <input type="text" class="form-control" name="title" id="title">
+                                            </div>
+                                        </div>
+                                        <div class="col-sm-3">
+                                            <div class="form-group">
+                                                <label for="">Số tập</label>
+                                                <input type="text" class="form-control" name="sotap" id="sotap" placeholder="Nhập vào dữ liệu...">
+                                            </div>
+                                        </div>
+                                        <div class="col-sm-3">
+                                            <div class="form-group">
+                                                <label for="">Thời lượng phim</label>
+                                                <input type="text" class="form-control" name="thoiluong" id="thoiluong" placeholder="Nhập vào dữ liệu...">
+                                            </div>
+                                        </div>
+                                        <div class="col-sm-3">
+                                            <div class="form-group">
+                                                <label for="">Slug</label>
+                                                <input type="text" class="form-control" name="slug" id="slug" placeholder="Nhập vào dữ liệu...">
+                                            </div>
+                                        </div>
+                                        <div class="col-sm-3">
+                                            <div class="form-group">
+                                                <label for="">Tên tiếng anh</label>
+                                                <input type="text" class="form-control" name="name_eng" id="name_eng" placeholder="Nhập vào dữ liệu...">
+                                            </div>
+                                        </div>
+                                        <div class="col-sm-3">
+                                            <div class="form-group">
+                                                <label for="">Trailer</label>
+                                                <input type="text" class="form-control" name="trailer" id="trailer" placeholder="Nhập vào dữ liệu...">
+                                            </div>
+                                        </div>
+                
+                                        
+                                    </div>
+                                    <div class="row">
+                                        <div class="col-sm-6">
+                                            <div class="form-group">
+                                                
+                                            </div>
+                                        </div>
+
+                                        <div class="col-sm-6">
+                                            <div class="form-group">
+
+                                            </div>
+                                        </div>
+                                    </div>
+                                </form>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">
+                        {!! Form::submit('Cập nhật', ['class'=>' btn btn-success']) !!}
+                    </button>
+                </div>
+
+            </div>
+        </div>
+    </div> -->
 
 @endsection
