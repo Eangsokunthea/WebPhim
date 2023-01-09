@@ -6,9 +6,9 @@
 @section('content')
   
     <div class="card-body">
-        <a href="{{route('info.create')}}" class="btn btn-primary">Cập nhập thông tin Website</a>
+        <a href="{{route('info.create')}}" class="btn btn-primary">Cập nhập</a>
 
-        <h3 class="text-center">Quản lý thông tin Website</h3>
+        <h3 class="text-center" style="font-weight: 500;">QUẢN LÝ THÔNG TIN WEBSITE</h3>
         @if($errors->any())
             <div class="alert alert-danger">
                 <ul>
@@ -25,7 +25,7 @@
                     <th>#</th>
                     <th>Tiêu Đề</th>
                     <th>Copyright</th>
-                    <th>Mô tả</th>
+                    <!-- <th>Mô tả</th> -->
                     <th>Hình ảnh</th>
                     <th>Quản lý</th>
                 </tr>
@@ -36,17 +36,14 @@
                     <td>{{$i++}}</td>
                     <td>{{$cate->title}}</td>
                     <td>{{$cate->copyright}}</td>
-                    <td>{{$cate->description}}</td>
+                    <!-- <td>{{$cate->description}}</td> -->
                     <td>
-                        <img src="{{asset('uploads/logo/'.$cate->logo)}}" width="40%">
+                        <img src="{{asset('uploads/logo/'.$cate->logo)}}" width="15%">
                     </td>
                     <td>
-                        <a href="{{route('info.edit',$cate->id)}}">
-                            <i class="fa fa-edit"></i>
-                        </a>
-                   
-                        <a data-toggle="modal" data-target="#info_modal">
-                            <i class="fa fa-eye" style="color: #2196f3;"></i>
+                        <a href="{{route('info.edit',$cate->id)}}" class="active btn btn-info btn-sm" style="font-size: 10px;" ><i class="fa fa-edit" title="click to change it"></i></a> 
+                        <a data-toggle="modal" data-target="#info_modal" class="btn btn-primary btn-sm" href="#" style="font-size: 10px;">
+                              <i class="fas fa-folder"></i>
                         </a>
                     </td>
                 </tr>
@@ -98,9 +95,9 @@
                                                     <i class="fa fa-edit"></i>
                                                 </a>
                                         
-                                                <a data-toggle="modal" data-target="#Login_or_Register">
+                                                <!-- <a data-toggle="modal" data-target="#Login_or_Register">
                                                     <i class="fa fa-eye" style="color: #2196f3;"></i>
-                                                </a>
+                                                </a> -->
                                             </td>
                                         </tr>
                                         @endforeach

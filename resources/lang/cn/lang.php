@@ -7,4 +7,6 @@ return [
     'year' => '年',
     'category' => '类别',
     'language' => '语',
+    'china' => '中国',
+    'AdminName' => '管理员网络看电影',
 ];

@@ -7,4 +7,6 @@ return [
     'year' => 'Year',
     'category' => 'Category',
     'language' => 'Language',
+    'english' => 'English',
+    'AdminName' => 'Admin Web Movie',
 ];

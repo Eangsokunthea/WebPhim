@@ -8,6 +8,7 @@ use App\Models\Episode;
 use App\Models\Genre;
 use App\Models\Movie;
 use App\Models\Movie_Genre;
+use App\Models\Rating;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\File;
@@ -38,24 +39,25 @@ class MovieController extends Controller
         File::put($destinationPath.'movies.json',json_encode($list));
         return view('BackEnd.movie.index',compact('list', 'category', 'country', 'list_genre', 'genre'));
     }
+    
 
-    public function edit_modal_movie($id){ 
-        $category = Category::pluck('title','id');
-        $country = Country::pluck('title','id');
-        $genre = Genre::pluck('title','id');
-        $list_genre = Genre::all();
-        $movie = Movie::find($id);
-        $movie_genre = $movie->movie_genre;
-        return response()->json([
-            'status'=>200,
-            'category'=>$category,
-            'country'=>$country,
-            'genre'=>$genre,
-            'list_genre'=>$list_genre,
-            'movie'=>$movie,
-            'movie_genre'=>$movie_genre,
-        ]);
-    }
+    // public function edit_modal_movie($id){ 
+    //     $category = Category::pluck('title','id');
+    //     $country = Country::pluck('title','id');
+    //     $genre = Genre::pluck('title','id');
+    //     $list_genre = Genre::all();
+    //     $movie = Movie::find($id);
+    //     $movie_genre = $movie->movie_genre;
+    //     return response()->json([
+    //         'status'=>200,
+    //         'category'=>$category,
+    //         'country'=>$country,
+    //         'genre'=>$genre,
+    //         'list_genre'=>$list_genre,
+    //         'movie'=>$movie,
+    //         'movie_genre'=>$movie_genre,
+    //     ]);
+    // }
 
     public function category_choose(Request $request){
         $data = $request->all();
@@ -263,25 +265,25 @@ class MovieController extends Controller
      */
     public function store(Request $request)
     {
-        // $data = $request->all();
-        $data = $request->validate(
-            [
-                'title' => 'required|unique:movies|max:255',
-                'slug' => 'required|unique:movies|max:255',
-                'description' => 'required|max:255',
-                'hinhanh' => 'required|image|mimes:jpg,png,ipeg,gif,svg|max:2048|dimensions:min_width=100, min_height=100,max_width=2000,max_height=2000',
-                'status' => 'required',
-            ],
-            [
-                'title.unique' => 'Tên movie đã có, xin điền tên khác',
-                'slug.unique' => 'Slug movie đã có, xin điền slug khác',
-                'title.required' => 'Tên movie phải có',
-                'slug.required' => 'Từ khóa movie phải có',
-                'description.required' => 'Mô tả movie phải có',
-                'hinhanh.required' => 'Hình ảnh movie phải có',
-                'status.required' => 'Kícch hoạt movie phải có',
-            ]
-        );
+        $data = $request->all();
+        // $data = $request->validate(
+        //     [
+        //         'title' => 'required|unique:movies|max:255',
+        //         'slug' => 'required|unique:movies|max:255',
+        //         'description' => 'required|max:255',
+        //         'hinhanh' => 'required|image|mimes:jpg,png,ipeg,gif,svg|max:2048|dimensions:min_width=100, min_height=100,max_width=2000,max_height=2000',
+        //         'status' => 'required',
+        //     ],
+        //     [
+        //         'title.unique' => 'Tên movie đã có, xin điền tên khác',
+        //         'slug.unique' => 'Slug movie đã có, xin điền slug khác',
+        //         'title.required' => 'Tên movie phải có',
+        //         'slug.required' => 'Từ khóa movie phải có',
+        //         'description.required' => 'Mô tả movie phải có',
+        //         'hinhanh.required' => 'Hình ảnh movie phải có',
+        //         'status.required' => 'Kícch hoạt movie phải có',
+        //     ]
+        // );
         $movie = new Movie();
         $movie->title = $data['title'];
         $movie->tags = $data['tags'];
@@ -363,7 +365,6 @@ class MovieController extends Controller
     public function update(Request $request, $id)
     {
         $data = $request->all();
-       
         $movie = Movie::find($id);
         $movie->title = $data['title'];
         $movie->tags = $data['tags'];
@@ -431,8 +432,36 @@ class MovieController extends Controller
 
         $movie->delete();
         toastr()->success('Thành công','Xóa phim phim thành công.');
-        return redirect()->back()->with('message', 'Xóa phim thành công');
+        return redirect()->back();
     }
+
+    public function delete($id){
+        $movie = Movie::find($id);
+        if(file_exists('uploads/movie/'.$movie->image)){
+            unlink('uploads/movie/'.$movie->image);
+        }
+        //xoa the loai
+        Movie_Genre::whereIn('movie_id', [$movie->id])->delete();
+        //xoa tap phim
+        Episode::whereIn('movie_id', [$movie->id])->delete();
+
+        $movie->delete();
+        toastr()->success('Thành công','Xóa phim phim thành công.');
+        return redirect()->back();
+    } 
+
+    public function danh_gia(){
+        $list = Rating::with('movie')->orderBy('id', 'DESC')->get();
+        $movie = Movie::pluck('title', 'id');
+
+        return view('BackEnd.rating.index',compact('list', 'movie'));
+    }
+    
+    public function delete_rating($id){
+        Rating::find($id)->delete();
+        toastr()->success('Thành công','Xóa đánh giá thành công.');
+        return redirect()->back();
+    }  
 
     
 }

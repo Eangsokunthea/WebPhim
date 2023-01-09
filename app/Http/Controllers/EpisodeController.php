@@ -40,19 +40,19 @@ class EpisodeController extends Controller
      */
     public function store(Request $request)
     {
-        // $data = $request->all();
-        $data = $request->validate(
-            [
-                'title' => 'required',
-                'linkphim' => 'required|max:255',
-                'episode' => 'required',
-            ],
-            [
-                'title.required' => 'Tên tập phim phải có',
-                'linkphim.required' => 'Mô tả tập phim phải có',
-                'episode.required' => 'Kícch hoạt tập phim phải có',
-            ]
-        );
+        $data = $request->all();
+        // $data = $request->validate(
+        //     [
+        //         'title' => 'required',
+        //         'linkphim' => 'required|max:255',
+        //         'episode' => 'required',
+        //     ],
+        //     [
+        //         'title.required' => 'Tên tập phim phải có',
+        //         'linkphim.required' => 'Mô tả tập phim phải có',
+        //         'episode.required' => 'Kícch hoạt tập phim phải có',
+        //     ]
+        // );
         $episode_check =  Episode::where('episode', $data['episode'])->where('movie_id', $data['movie_id'])->count();
         if($episode_check>0){
             return redirect()->back();
@@ -62,7 +62,7 @@ class EpisodeController extends Controller
             $ep->linkphim = $data['link'];
             $ep->episode = $data['episode'];
             $ep->updated_at = Carbon::now('Asia/Ho_Chi_Minh');
-            $ep->created_at = Carbon::now('Asia/Ho_Chi_Minh');
+            $ep->created_at->Carbon::now('Asia/Ho_Chi_Minh')->toDateString();
             $ep->save(); 
         }
         toastr()->success('Thành công','Thêm tập phim phim thành công.');
@@ -145,6 +145,12 @@ class EpisodeController extends Controller
         toastr()->success('Thành công','Xóa tập phim phim thành công.');
         return redirect()->back();
     }
+    
+    public function delete($id){
+        Episode::find($id)->delete();
+        toastr()->success('Thành công','Xóa tập phim phim thành công.');
+        return redirect()->back();
+    } 
 
     public function select_movie()
     {
@@ -164,5 +170,6 @@ class EpisodeController extends Controller
 
         echo $output;
     }
+
     
 }

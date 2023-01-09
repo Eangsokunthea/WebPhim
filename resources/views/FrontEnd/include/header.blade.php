@@ -1,123 +1,111 @@
+<header id="main-header">
+    <div class="main-header">
+      <div class="container-fluid">
+        <div class="row">
+          <div class="col-sm-12">
+            <nav class="navbar navbar-expand-lg navbar-light p-0">
+              <div class="col-md-2">
+                  <a href="index.html" class="navbar-brand">
+                    <img src="{{asset('uploads/logo/'.$info->logo)}}" class="img-fluid logo channel-logo" alt="" />
+                  </a>
+              </div>
+              <div class="col-md-8">
+                
+                @include('FrontEnd.include.navbar')
+                  
+              </div>
 
-<header id="header">
-    <div class="container">
-        <div class="row" id="headwrap">
-            <div class="col-md-3 col-sm-6 slogan">
-                <p class=""><a class="logo" href="" title="phim hay ">
-                    <img src="{{asset('uploads/logo/'.$info->logo)}}" width="100px" alt=""> 
-                </a></p>
-                </a>
-                <!-- <a class="logo" href="" title="phim hay "><img src="{{asset('/FrontEnd/img/Gmovies.png')}}" width="90px" alt=""></a> -->
-            </div>
-            <div class="col-md-5 col-sm-6 halim-search-form hidden-xs">
-                <div class="header-nav">
-                    <div class="col-xs-12">
-                        <style type="text/css">
-                            ul#result {
-                                position: absolute;
-                                z-index: 9999;
-                                background: #1b2d3c;
-                                width: 94%;
-                                padding: 10px;
-                                margin: 1px;
-                            }
-                        </style>
-                        <div class="form-group form-timkiem">
-                            <div class="input-group col-xs-12"> 
-                                <form action="{{route('tim-kiem')}}" method="GET">
-                                    <input id="timkiem" type="text" name="search" class="form-control" placeholder="Tìm kiếm phim..." autocomplete="off">
-                                    <i class="animate-spin hl-spin4 hidden">Tìm kiếm</i>
-                                    <!-- <button class="btn btn-primary">Tìm kiếm</button> -->
-                                </form>
-                            </div>
-                        </div>
-                        
-                    <ul class="list-group" id="result" style="display: none;"></ul>
+              <div class="navbar-right menu-right">
+                <ul class="d-flex align-items-center list-inline">
+                  <li class="nav-item nav-icon">
+                    <a href="#" class="search-toggle device-search">
+                      <i class="fa fa-search"></i>
+                    </a>
+                    <div class="search-box iq-search-bar d-search">
+                        <form action="{{route('tim-kiem')}}" method="GET" class="searchbox">
+                          <div class="form-group position-relative">
+                            <input type="text" name="search" class="text search-input font-size-12"
+                              placeholder="type here to search..." />
+                            <i class="search-link fa fa-search"></i>
+                          </div>
+                        </form>
                     </div>
-                </div>
-            </div>
-            <div class="col-md-4 hidden-xs">
-                <div id="get-bookmark" class="box-shadow"><i class="hl-bookmark"></i><span> Bookmarks</span><span class="count">0</span></div>
-                <div id="bookmark-list" class="hidden bookmark-list-on-pc">
-                    <ul style="margin: 0;"></ul>
-                </div>
-                
-                <div class="btn-group">
-                    <button type="button" class="toggle dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                        @lang('lang.language') 
-                        <span class="caret"></span>
-                    </button>
-                    <ul class="dropdown-menu">
-                        <li><a class="dropdown-item" href="{{url('lang/vi')}}"><img src="{{asset('frontEnd/img/vietnam.png')}}" width="20px"> Tiếng Việt</a></li>
-                        <li><a class="dropdown-item" href="{{url('lang/kh')}}"><img src="{{asset('frontEnd/img/cambodia.png')}}" width="20px"> Tiếng Khmer</a></li>
-                        <li><a class="dropdown-item" href="{{url('lang/en')}}"><img src="{{asset('frontEnd/img/english.png')}}" width="20px"> Tiếng Anh</a></li>
-                        <li><a class="dropdown-item" href="{{url('lang/cn')}}"><img src="{{asset('frontEnd/img/china.png')}}" width="20px"> Tiếng Trung</a></li>
-                    </ul>
-                </div>
+                  </li>
+                  
+                  
+                  <li class="nav-item nav-icon">
+                    <a href="#" class="iq-user-dropdown search-toggle d-flex align-items-center p-0" >
+                      @if(Session::get('id'))
+                        <i class="fa-sharp fa-solid fa-circle-user"></i>
+                      @else
+                        <i class="fa-sharp fa-solid fa-user-lock "></i>
+                      @endif
+                      <!-- <img src="{{asset('/images/cv.jpg')}}" class="img-fluid user-m rounded-circle" alt="" /> -->
+                    </a>
+                    <div class="iq-sub-dropdown iq-user-dropdown">
+                      <div class="iq-card shadow-none m-0">
+                        <div class="iq-card-body p-0 pl-3 pr-3">
+                          <a href="{{route('sign_up')}}" class="iq-sub-card setting-dropdown">
+                            <div class="media align-items-center">
+                                &nbsp;<i class="fa fa-user-plus" aria-hidden="true" style="color: #e50914;"></i>&nbsp;&nbsp;ĐĂNG KÝ <br>
+                            </div>
+                          </a>
+                          @if(Session::get('id'))
+                              <a href="#"class="iq-sub-card setting-dropdown" onclick="document.getElementById('customerLogout').submit();">
+                                <div class="media align-items-center">
+                                  &nbsp;<i class="fa fa-sign-in" aria-hidden="true" style="color: #e50914;"></i>&nbsp; ĐĂNG XUẤT
+                                </div>
+                              </a>
+                              <form action="{{route('sign_out')}}" method="post" id="customerLogout">
+                                  @csrf
+                              </form>
 
-                <div class="toggle"><img src="{{asset('/frontEnd/img/moon.png')}}" id="Mode" width="20px" class="mode_icon" alt=""></div>
+                              <a href="#" class="iq-sub-card setting-dropdown">
+                                <div class="media align-items-center">
+                                    &nbsp;<i class="fa fa-user text-primary"></i>&nbsp;&nbsp;THÔNG TIN BẠN<br>
+                                </div>
+                              </a>
 
-                <style>
-                    :root{
-                        --primary-color: #212121;
-                        --secondary-color: #f5f5f5;
-                        --shadow: rgba(0, 0, 0, 0.2);
-                    }
-                    .dark{
-                        --primary-color: #f5f5f5;
-                        --secondary-color: #212121;
-                        --shadow: rgba(255, 255, 255, 0.2);
-                    }
+                          @else
+                              <a href="{{route('sign_in')}}" class="iq-sub-card setting-dropdown">
+                                <div class="media align-items-center">
+                                    &nbsp;<i class="fa fa-sign-in" aria-hidden="true" style="color: #e50914;"></i>&nbsp;&nbsp;ĐĂNG NHẬP
+                                </div>
+                              </a>
+                          @endif
 
-                    /* .warning:hover {
-                    background: #ff9800;
-                    color: white;
-                    }  */
-
-                    .mode_icon{
-                        color:#fff; 
-                    }
-
-                    body.halimthemes {
-                        color: #a5a5a5;
-                        font-size: 14px;
-                        line-height: 1.6;
-                        letter-spacing: 0.6px;
-                        overflow-x: hidden;
-                        background: var(--primary-color) url(assets/images/halimBg.png) fixed center;
-                    }
-                    
-                    .movie_info {
-                       
-                        /* background: #00000026; */
-                        background: #212121;
-                       
-                    }
-                    #wrapper {
-                        background: var(--primary-color);
-                        padding: 0 0 15px;
-                    }
-                    .toggle{
-                        background:#224361; 
-                        display:inline-block; 
-                        line-height:20px; 
-                        padding:6px 15px; 
-                        border-radius:20px; 
-                        color:#fff; 
-                        cursor:pointer; 
-                        transition:.4s all; 
-                        margin-top:1px; 
-                        margin-right:15px 
-                    }
-                   
-                    .toggle:hover { 
-                        background:#337ab7 
-                    } 
-
-                </style>
-                
-            </div>           
+                        </div>
+                      </div>
+                    </div>
+                  </li>
+                </ul>
+              </div>
+            </nav>
+            <div class="nav-overlay"></div>
+          </div>
         </div>
-        
+      </div>
     </div>
 </header>
+
+
+
+<!-- <script>
+    const toggle = document.getElementById('toggleDark');
+    const body = document.querySelector('body');
+
+    toggle.addEventListener('click', function(){
+        this.classList.toggle('bi-moon');
+        if(this.classList.toggle('bi-brightness-high-fill')){
+            body.style.background = 'black';
+            body.style.color = 'white';
+            body.style.transition = '2s';
+        }else{
+            body.style.background = 'white';
+            body.style.color = 'black';
+            body.style.transition = '2s';
+        }
+
+    });
+</script> -->
+

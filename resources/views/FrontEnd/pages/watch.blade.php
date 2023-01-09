@@ -5,7 +5,7 @@
 
 @section('content')  
 
-    <div class="row container" id="wrapper">
+    <div class="row" id="wrapper" style="margin-left: 10px; margin-right: 10px;">
         <div class="halim-panel-filter">
         <div class="panel-heading">
             <div class="row">
@@ -18,7 +18,9 @@
             <div class="ajax"></div>
         </div>
         </div>
-        <main id="main-contents" class="col-xs-12 col-sm-12 col-md-8">
+    </div>
+    <div class="row" id="wrapper" style="margin-left: 10px; margin-right: 10px;">
+        <main id="main-contents" class="col-xs-12 col-sm-12 col-md-7">
             <section id="content" class="test">
                 <div class="clearfix wrap-content">
                     <style>
@@ -133,27 +135,28 @@
                                 <a class="halim-thumb" href="{{route('movie',[$hot->slug])}}" title="{{$hot->title}}">
                                     <figure><img class="lazy img-responsive" src="{{asset('uploads/movie/'.$hot->image)}}" alt="{{$hot->title}}" title="{{$hot->title}}"></figure>
                                     <span class="status">
-                                        @if($hot->resolution==0)
-                                            HD
-                                        @elseif($hot->resolution==1)
-                                            SD 
-                                        @elseif($hot->resolution==2)
-                                            HDCam
-                                        @elseif($hot->resolution==3)
-                                            Cam
-                                        @elseif($hot->resolution==4)
-                                            FullHD
-                                        @else
-                                            Trailer    
-                                        @endif
-                                    </span><span class="episode"><i class="fa fa-play" aria-hidden="true"></i>
-                                    
-                                        {{$hot->episode_count}}/{{$hot->sotap}} |
-                                      
                                         @if($hot->phude==0)
-                                            Phụ đề
+                                            Phụ đề 
                                         @else
                                             Thuyết minh
+                                        @endif
+                                    </span><span class="episode"><i class="fa fa-play" aria-hidden="true"></i>
+                                        @if($hot->thuocphim=='phimle')
+                                            @if($hot->resolution==0)
+                                            HD
+                                            @elseif($hot->resolution==1)
+                                                SD 
+                                            @elseif($hot->resolution==2)
+                                                HDCam
+                                            @elseif($hot->resolution==3)
+                                                Cam
+                                            @elseif($hot->resolution==4)
+                                                FullHD
+                                            @else
+                                                Trailer    
+                                            @endif   
+                                        @else
+                                            {{$hot->episode_count}}/{{$hot->sotap}} 
                                         @endif
                                     </span> 
                                     <div class="icon_overlay"></div>
@@ -184,8 +187,12 @@
                         var owl = $('#halim_related_movies-2');
                         owl.owlCarousel({
                             loop: true,margin: 5,autoplay: true,autoplayTimeout: 4000,autoplayHoverPause: true,nav: true,navText: 
-                                ['<i class="hl-down-open rotate-left"></i>', '<i class="hl-down-open rotate-right"></i>'],responsiveClass: true,responsive: 
-                                    {0: {items:2},480: {items:3}, 600: {items:4},1000: {items: 4}}})});
+                                ['<i class="fa fa-angle-double-left"></i>', '<i class="fa fa-angle-double-right"></i>'],responsiveClass: true,responsive: 
+                                    {
+                                        0: {items:2},
+                                        480: {items:3}, 
+                                        1000: {items: 6}
+                                    }})});
                     </script>
                 </div>
             </section> 

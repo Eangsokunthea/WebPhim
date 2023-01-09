@@ -4,7 +4,7 @@
 @endsection
 
 @section('content')
-    <div class="row container" id="wrapper">
+    <div class="row" id="wrapper" style="margin-left: 10px; margin-right: 10px;">
         <div class="halim-panel-filter">
             <div class="panel-heading">
                 <div class="row">
@@ -25,7 +25,9 @@
                 <div class="ajax"></div>
             </div>
         </div>
-        <main id="main-contents" class="col-xs-12 col-sm-12 col-md-8">
+    </div>
+    <div class="row" id="wrapper" style="margin-left: 10px; margin-right: 10px;">
+        <main id="main-contents" class="col-xs-12 col-sm-12 col-md-7">
             <section>
                 <div class="section-bar clearfix">
                     <h1 class="section-title"><span>Năm : {{$year}}</span></h1>
@@ -37,30 +39,33 @@
                 </div>
                 <div class="halim_box">
                     @foreach($movie as $key => $mov)
-                    <article class="col-md-3 col-sm-3 col-xs-6 thumb grid-item post-37606">
+                    <article class="col-md-2 col-sm-3 col-xs-6 thumb grid-item post-37606">
                         <div class="halim-item">
                             <a class="halim-thumb" href="{{route('movie',$mov->slug)}}">
                                 <figure><img class="lazy img-responsive" src="{{asset('uploads/movie/'.$mov->image)}}" alt="{{$mov->title}}" title="{{$mov->title}}"></figure>
                                 <span class="status">
-                                    @if($mov->resolution==0)
-                                        HD
-                                    @elseif($mov->resolution==1)
-                                        SD 
-                                    @elseif($mov->resolution==2)
-                                        HDCam
-                                    @elseif($mov->resolution==3)
-                                        Cam
-                                    @elseif($mov->resolution==4)
-                                        FullHD
-                                    @else
-                                        Trailer    
-                                    @endif
-                                </span><span class="episode"><i class="fa fa-play" aria-hidden="true"></i>
-                                    {{$mov->episode_count}}/{{$mov->sotap}} |
                                     @if($mov->phude==0)
-                                        Phụ đề
+                                        Phụ đề 
                                     @else
                                         Thuyết minh
+                                    @endif
+                                </span><span class="episode"><i class="fa fa-play" aria-hidden="true"></i>
+                                    @if($mov->thuocphim=='phimle')
+                                        @if($mov->resolution==0)
+                                        HD
+                                        @elseif($mov->resolution==1)
+                                            SD 
+                                        @elseif($mov->resolution==2)
+                                            HDCam
+                                        @elseif($mov->resolution==3)
+                                            Cam
+                                        @elseif($mov->resolution==4)
+                                            FullHD
+                                        @else
+                                            Trailer    
+                                        @endif   
+                                    @else
+                                        {{$mov->episode_count}}/{{$mov->sotap}} 
                                     @endif
                                 </span> 
                                 <div class="icon_overlay"></div>
@@ -84,7 +89,7 @@
                         </div>
                     </article>
                     @endforeach
-
+    
                 </div>
                 <div class="clearfix"></div>
                 <div class="text-center">

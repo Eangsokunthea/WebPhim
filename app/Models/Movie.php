@@ -24,6 +24,29 @@ class Movie extends Model
     public function episode(){
         return $this->hasMany(Episode::class);
     }
+    public function comment(){
+        return $this->hasMany(Comment::class);
+    }
+    public function rating(){
+        return $this->hasMany(Rating::class);
+    }
+
+
+
+    // public function customer(){
+    //     return $this->belongsTo(Customer::class, 'created_by', 'id');
+    // }
+
+    // public function user(){
+    //     return $this->belongsTo(User::class, 'created_by', 'id');
+    // }
+
+    // public function comments(){
+    //     return $this->hasMany(Comment::class, 'movie_id', 'id');
+    // }
+
+    
+
 
 
 }

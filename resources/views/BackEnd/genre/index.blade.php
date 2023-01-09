@@ -15,7 +15,7 @@
             </div>
         @endif 
         
-        <h3 class="text-center">Quản lý thể loại</h3>
+        <h3 class="text-center">QUẢN LÝ THỂ LOẠI</h3>
         
         <table id="example1" class="table table-bordered table-striped">
             <thead>
@@ -38,16 +38,14 @@
                     <td>{{$cate->description}}</td>
                     <td>
                         @if($cate->status)
-                            Hiển thị
+                            <span class="badge badge-success">Hiển thị</span>
                         @else
-                            Không hiển thị    
+                            <span class="badge badge-danger">Không hiển thị </span>
                         @endif    
                     </td>
                     <td>
-                        {!! Form::open(['method'=>'DELETE','route'=>['genre.destroy',$cate->id],'onsubmit'=>'return confirm("Xóa hay không?")']) !!}
-                            {!! Form::submit('Xóa', ['class'=>'btn btn-danger']) !!}
-                        {!! Form::close() !!}
-                        <a href="{{route('genre.edit',$cate->id)}}"class="btn btn-warning">Sửa</a>
+                        <a href="{{route('genre.edit',$cate->id)}}" class="active btn btn-info btn-sm" style="font-size: 10px;" ><i class="fa fa-edit" title="click to change it"></i></a>&nbsp;  
+                        <a href="{{route('delete_genre', ['id'=>$cate->id])}}" class="btn btn-danger btn-sm" id="delete" style="font-size: 10px;"><i class="fas fa-trash-alt" title="click to destroy"></i></a>  
                     </td>
                 </tr>
               @endforeach

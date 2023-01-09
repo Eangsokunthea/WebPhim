@@ -103,23 +103,23 @@ class CategoryController extends Controller
      */
     public function update(Request $request, $id)
     {
-        // $data = $request->all();
-        $data = $request->validate(
-            [
-                'title' => 'required|unique:catgories|max:255',
-                'slug' => 'required|unique:catgories|max:255',
-                'description' => 'required|max:255',
-                'status' => 'required',
-            ],
-            [
-                'title.unique' => 'Tên danh mục đã có, xin điền tên khác',
-                'slug.unique' => 'Slug danh mục đã có, xin điền slug khác',
-                'title.required' => 'Tên danh mục phải có',
-                'slug.required' => 'Từ khóa danh mục phải có',
-                'description.required' => 'Mô tả danh mục phải có',
-                'status.required' => 'Kícch hoạt danh mục phải có',
-            ]
-        );
+        $data = $request->all();
+        // $data = $request->validate(
+        //     [
+        //         'title' => 'required|unique:catgories|max:255',
+        //         'slug' => 'required|unique:catgories|max:255',
+        //         'description' => 'required|max:255',
+        //         'status' => 'required',
+        //     ],
+        //     [
+        //         'title.unique' => 'Tên danh mục đã có, xin điền tên khác',
+        //         'slug.unique' => 'Slug danh mục đã có, xin điền slug khác',
+        //         'title.required' => 'Tên danh mục phải có',
+        //         'slug.required' => 'Từ khóa danh mục phải có',
+        //         'description.required' => 'Mô tả danh mục phải có',
+        //         'status.required' => 'Kícch hoạt danh mục phải có',
+        //     ]
+        // );
         $category = Category::find($id);
         $category->title = $data['title'];
         $category->slug = $data['slug'];
@@ -127,7 +127,7 @@ class CategoryController extends Controller
         $category->status = $data['status'];
         $category->save();
         toastr()->success('Thành công','Update danh mục phim thành công.');
-        return Redirect::to('/category')->with('message', 'Update category thành công');
+        return Redirect::to('/category');
     }
 
     /**
@@ -143,6 +143,11 @@ class CategoryController extends Controller
         return redirect()->back();
 
     }
+    public function delete($id){
+        Category::find($id)->delete();
+        toastr()->success('Thành công','Xóa danh mục phim thành công.');
+        return redirect()->back();
+    } 
 
     public function resorting_category(Request $request){
         $data = $request->all();

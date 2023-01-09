@@ -1,0 +1,14 @@
+
+{
+    "home" :  "Home",
+    "genre" :  "Genre",
+    "country" :  "Country",
+    "year" :  "Year",
+    "category" :  "Category",
+    "language" :  "Language",
+    "vietnam" : "VietNam",
+    "english" : "English",
+    "khmer" : "Cambodia",
+    "china" : "China",
+    "AdminName" : "Admin Web Movie"
+}

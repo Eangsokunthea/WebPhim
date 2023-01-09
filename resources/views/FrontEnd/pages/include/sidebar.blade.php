@@ -1,12 +1,12 @@
 
-<aside id="sidebar" class="col-xs-12 col-sm-12 col-md-4">
+<aside id="sidebar" class="col-sm-4 col-xs-12 col-md-5">
     <div id="halim_tab_popular_videos-widget-7" class="widget halim_tab_popular_videos-widget">
         <div class="section-bar clearfix">
             <div class="section-title">
-                <span>Phim Hot</span>
+                <span>PIM NỔI BẬT-ĐANG XEM</span>
             </div>
         </div>
-        <section class="tab-content">
+        <section class="tab-content" id="content_teb">
             <div role="tabpanel" class="tab-pane active halim-ajax-popular-post">
             <div class="halim-ajax-popular-post-loading hidden"></div>
             <div id="halim-ajax-popular-post" class="popular-post">
@@ -47,7 +47,7 @@
                     <div style="float: left;">
                         <ul class="list-inline rating"  title="Average Rating">
                             @for($count=1; $count<=5; $count++)
-                            <li title="star_rating" style="font-size:20px;color:#ffcc00;padding:0">&#9733;</li>
+                            <li title="star_rating" style="font-size:15px;color:#ffcc00;padding:0">&#9733;</li>
                             @endfor
                         </ul>
                         <ul class="total_rating" title="Average Rating"></ul>  
@@ -66,15 +66,16 @@
     </div>
 </aside>
 
+
 <!-- phim ram chieu  -->
-<aside id="sidebar" class="col-xs-12 col-sm-12 col-md-4">
+<!-- <aside id="sidebar" class="col-xs-12 col-sm-4 col-md-4">
     <div id="halim_tab_popular_videos-widget-7" class="widget halim_tab_popular_videos-widget">
         <div class="section-bar clearfix">
             <div class="section-title">
                 <span>Phim Sắp Chiếu</span>
             </div>
         </div>
-        <section class="tab-content">
+        <section class="tab-content" id="content_teb">
             <div role="tabpanel" class="tab-pane active halim-ajax-popular-post">
             <div class="halim-ajax-popular-post-loading hidden"></div>
             <div id="halim-ajax-popular-post" class="popular-post">
@@ -115,7 +116,7 @@
                     <div style="float: left;">
                         <ul class="list-inline rating"  title="Average Rating">
                             @for($count=1; $count<=5; $count++)
-                            <li title="star_rating" style="font-size:20px;color:#ffcc00;padding:0">&#9733;</li>
+                            <li title="star_rating" style="font-size:15px;color:#ffcc00;padding:0">&#9733;</li>
                             @endfor
                         </ul>
                         <ul class="total_rating" title="Average Rating"></ul>  
@@ -132,14 +133,13 @@
         </section>
         <div class="clearfix"></div>
     </div>
-</aside>
+</aside> -->
 
-<aside id="sidebar" class="col-xs-12 col-sm-12 col-md-4">
+<aside id="sidebar" class="col-xs-12 col-sm-4 col-md-4">
     <div id="halim_tab_popular_videos-widget-7" class="widget halim_tab_popular_videos-widget">
         <div class="section-bar clearfix">
             <div class="section-title">
-                <span>Top Views</span>
-                
+                <span>PHIM XEM NHIỀU-ĐANG XEM</span>
             </div>
         </div>
         <ul class="nav nav-pills mb-3" id="pills-tab" role="tablist">
@@ -153,28 +153,25 @@
                 <a class="nav-link filter-sidebar" id="pills-contact-tab" data-toggle="pill" href="#thang" role="tab" aria-controls="pills-contact" aria-selected="false">Tháng</a>
             </li>
         </ul>
-      
-        <div class="tab-content" id="pills-tabContent">        
-            <div class="tab-pane fade show active" id="ngay" role="tabpanel" aria-labelledby="pills-home-tab">
-                <div id="halim-ajax-popular-post" class="popular-post">    
-                  
-                    <span id="show0"></span>
+        <section class="tab-content" id="" >
+            <div id="pills-tabContent">        
+                <div class="tab-pane fade show active" id="ngay" role="tabpanel" aria-labelledby="pills-home-tab">
+                    <div id="halim-ajax-popular-post" class="popular-post">    
+                        <span id="show0"></span>
+                    </div>
+                <div class="tab-pane fade" id="tuan" role="tabpanel" aria-labelledby="pills-profile-tab">
+                    <div id="halim-ajax-popular-post" class="popular-post">    
+                        <span id="show1"></span>
+                    </div>
                 </div>
-            <div class="tab-pane fade" id="tuan" role="tabpanel" aria-labelledby="pills-profile-tab">
-                <div id="halim-ajax-popular-post" class="popular-post">    
-                    <span id="show1"></span>
-                   
+                <div class="tab-pane fade" id="thang" role="tabpanel" aria-labelledby="pills-contact-tab">
+                    <div id="halim-ajax-popular-post" class="popular-post">    
+                        <span id="show2"></span>
+                    </div>
+                    
                 </div>
-                
-            </div>
-            <div class="tab-pane fade" id="thang" role="tabpanel" aria-labelledby="pills-contact-tab">
-                <div id="halim-ajax-popular-post" class="popular-post">    
-                  
-                    <span id="show2"></span>
-                </div>
-                
-            </div>
-        </div> 
+            </div> 
+        </section>
 
         <div class="clearfix"></div>
     </div>

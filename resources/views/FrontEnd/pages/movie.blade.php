@@ -4,7 +4,8 @@
 @endsection
 
 @section('content')  
-    <div class="row container" id="wrapper">
+    <div class="row" id="wrapper" style="margin-left: 10px; margin-right: 10px;">
+    <!-- <div class="row container" id="wrapper"> -->
         <div class="halim-panel-filter">
             <div class="panel-heading">
                 <div class="row">
@@ -26,7 +27,9 @@
                 <div class="ajax"></div>
             </div>
         </div>
-        <main id="main-contents" class="col-xs-12 col-sm-12 col-md-8">
+    </div>
+    <div class="row" id="wrapper" style="margin-left: 10px; margin-right: 10px;">
+        <main id="main-contents" class="col-sm-8 col-xs-12 col-md-7">
             <section id="content" class="test">
                 <div class="clearfix wrap-content">
                     <div class="halim-movie-wrapper">
@@ -35,13 +38,13 @@
                             <div class="halim-pulse-ring"></div>
                         </div>
                         <div class="title-wrapper" style="font-weight: bold;">
-                            Bookmark
+                            GMovie Phim
                         </div>
                     </div>
                     <div class="movie_info col-xs-12">
                         <div class="movie-poster col-md-3">
                             <img class="movie-thumb" src="{{asset('uploads/movie/'.$movie->image)}}" alt="{{$movie->title}}">
-                            
+                        @if(Session::get('id'))
                             @if($movie->resolution!=5)
                                 @if($episode_current_list_count>0)   
                                 <div class="bwa-content">
@@ -54,12 +57,63 @@
                             @else
                                 <a href="#watch_trailer" style="display: block;" class="btn btn-primary watch_trailer">Xem Trailer</a>
                             @endif
+                        @else
+                                @if($movie->resolution!=5)
+                                    @if($episode_current_list_count>0)   
+                                    <div class="bwa-content">
+                                        <div class="loader"></div>
+                                        <a data-toggle="modal" data-target="#Login_or_Register" class="bwac-btn">
+                                        <i class="fa fa-play"></i>
+                                        </a>
+                                    </div>
+                                    @endif
+                                @else
+                                    <a href="#watch_trailer" style="display: block;" class="btn btn-primary watch_trailer">Xem Trailer</a>
+                                @endif
+                        @endif
+                            
+                            
+                            <ul class="list-inline rating"  title="Average Rating" style="
+                                margin-bottom:0px!important; text-align: center;">
+
+                                @for($count=1; $count<=5; $count++)
+
+                                @php
+
+                                    if($count<=$rating){ 
+                                    $color = 'color:#ffcc00;'; //mau vang
+                                    }
+                                    else {
+                                    $color = 'color:#ccc;'; //mau xam
+                                    }
                                 
+                                @endphp
+                                
+                                <li title="star_rating" 
+
+                                id="{{$movie->id}}-{{$count}}" 
+                                
+                                data-index="{{$count}}"  
+                                data-movie_id="{{$movie->id}}" 
+
+                                data-rating="{{$rating}}" 
+                                class="rating" 
+                                style="cursor:pointer; {{$color}} 
+
+                                font-size:20px;padding-left: 8px;padding-right: 8px;">&#9733;</li>
+
+                                @endfor
+
+                            </ul>
+                            <span class="total_rating"  title="Average Rating" style="font-size: 11px;padding-left: 78px;"> Đánh giá : {{$rating}}/{{$count_total}} lượt</span>
+
                         </div>
                         <div class="film-poster col-md-9">
-                            <h1 class="movie-title title-1" style="display:block;line-height:35px;margin-bottom: -14px;color: #ffed4d;text-transform: uppercase;font-size: 18px;">{{$movie->title}}</h1>
-                            <h2 class="movie-title title-2" style="font-size: 12px;">({{$movie->name_eng}})</h2>
+                            <!-- <h1 class="movie-title title-1" style="display:block;line-height:35px;margin-bottom: -14px;color: #ffed4d;text-transform: uppercase;font-size: 18px;">{{$movie->title}}</h1>
+                            <h2 class="movie-title title-2" style="font-size: 12px;">({{$movie->name_eng}})</h2> -->
                             <ul class="list-info-group">
+                                <h1 class="movie-title title-1" style="display:block;line-height:35px;margin-bottom: -14px;color: #ffed4d;text-transform: uppercase;font-size: 18px;">{{$movie->title}}</h1>
+                                <h2 class="movie-title title-2" style="font-size: 12px;">({{$movie->name_eng}})</h2>
                                 <li class="list-info-group-item"><span>Trạng Thái</span> : <span class="quality">
                                     @if($movie->resolution==0)
                                         HD
@@ -129,40 +183,7 @@
                                         Đang cập nhập    
                                     @endif    
                                 </li>
-                                
-                                <ul class="list-inline rating"  title="Average Rating">
-
-                                    @for($count=1; $count<=5; $count++)
-
-                                    @php
-
-                                        if($count<=$rating){ 
-                                        $color = 'color:#ffcc00;'; //mau vang
-                                        }
-                                        else {
-                                        $color = 'color:#ccc;'; //mau xam
-                                        }
-                                    
-                                    @endphp
-                                    
-                                    <li title="star_rating" 
-
-                                    id="{{$movie->id}}-{{$count}}" 
-                                    
-                                    data-index="{{$count}}"  
-                                    data-movie_id="{{$movie->id}}" 
-
-                                    data-rating="{{$rating}}" 
-                                    class="rating" 
-                                    style="cursor:pointer; {{$color}} 
-
-                                    font-size:30px;">&#9733;</li>
-
-                                    @endfor
-
-                                </ul>
-                                <span class="total_rating"  title="Average Rating"> Đánh giá : {{$rating}}/{{$count_total}} lượt</span>
-
+                            
                             </ul>
                             
                             <div class="movie-trailer">
@@ -185,7 +206,7 @@
                     <div class="entry-content htmlwrap clearfix">
                         <div class="video-item halim-entry-box">
                             <article id="post-38424" class="item-content">
-                            {{$movie->description}}
+                                {{$movie->description}}
                             </article>
                         </div>
                     </div>
@@ -211,21 +232,115 @@
                             </article>
                         </div>
                     </div>
+                    
+                    <div class="wrapper-comment">
+                        <style>
+                            .wrapper-comment {
+                                background: white;
+                                border-radius: 10px;
+                                /* width: 500px; */
+                                /* height: 300px; */
+                                display: flex;
+                                justify-content: center;
+                                align-items: center;
+                                border-bottom-left-radius: 0;
+                                border-bottom-right-radius: 0;
+                            }
+
+                            .wrapper-comment .form input {
+                                background: #222222;
+                                color: white;
+                                font-size: 15px;
+                                width: 600px;
+                                border-radius: 20px;
+                                padding: 10px;
+                                border: none;
+                                outline: none;
+                                margin-bottom: 10px;
+                                margin-top: 20px;
+                            }
+
+                            .wrapper-comment .form textarea {
+                                background: #222222;
+                                color: white;
+                                font-size: 15px;
+                                width: 600px;
+                                border-radius: 20px;
+                                padding: 10px;
+                                border: none;
+                                outline: none;
+                                resize: none;
+                            }
+
+                            .wrapper-comment .form .btn {
+                                background: #222222;
+                                color: white;
+                                font-size: 15px;
+                                border: none;
+                                outline: none;
+                                cursor: pointer;
+                                padding: 10px;
+                                width: 200px;
+                                border-radius: 20px;
+                                margin: 0 auto;
+                                display: block;
+                                margin-top: 5px;
+                                margin-bottom: 20px;
+                                opacity: 0.8;
+                                transition: 0.3s all ease;
+                            }
+
+                            .wrapper-comment .form .btn:hover {
+                                opacity: 1;
+                            }
+
+                            .content-comment {
+                                /* text-align: center; */
+                                background: royalblue;
+                                color: white;
+                                padding: 10px;
+                                /* width: 500px; */
+                                border-radius: 10px;
+                                border-top-left-radius: 0;
+                                border-top-right-radius: 0;
+                            }
+                            .content-comment p {
+                                margin-bottom: 15px;
+                                /* width: 450px; */
+                            }
+                        </style>
+                        <form action="" class="form">
+                            <input type="text" class="comment_name" name="name" placeholder="Tên bình luận">
+                            <br>
+                            <textarea cols="10" rows="3" class="comment_content" placeholder="Nội dung bình luận"></textarea>
+                            <div id="notify_comment"></div>
+                            <br>
+                            <button type="button" class="btn send-comment" >Gửi bình luận</button> 
+                        </form>
+                    </div>
+                    <div class="content-comment">
+                        <form>
+                            @csrf
+                            <input type="hidden" name="comment_movie_id" class="comment_movie_id" value="{{$movie->id}}">
+                            <div id="comment_show"></div>
+                        </form>
+                    </div>
+                    
 
                     <!-- comment fb -->
-                    <div class="section-bar clearfix">
+                    <!-- <div class="section-bar clearfix">
                         <h2 class="section-title"><span style="color:#ffed4d">Bình luận</span></h2>
                     </div>
                     <div class="entry-content htmlwrap clearfix">
                         @php 
                             $current_url = Request::url();
                         @endphp 
-                        <div class="video-item halim-entry-box">
+                        <div class="video-item halim-entry-box" style="color:#ffed4d">
                             <article id="post-38424" class="item-content">
                                 <div class="fb-comments" data-href="http://127.0.0.1:8000/WebPhimlrv8/public/phim/{{$current_url}}" data-width="100%" data-numposts="10"></div>
                             </article>
                         </div>
-                    </div>
+                    </div> -->
 
 
                     <!-- Trailer phim  -->
@@ -253,30 +368,34 @@
                     <div id="halim_related_movies-2" class="owl-carousel owl-theme related-film">
                         @foreach($related as $key => $hot)
                             @foreach($phimhot as $key => $hot)
-                        <article class="thumb grid-item post-38498">
+                        <article class="thumb grid-item post-38498"  style="padding: 2px;">
                             <div class="halim-item">
                                 <a class="halim-thumb" href="{{route('movie',[$hot->slug])}}" title="{{$hot->title}}">
                                     <figure><img class="lazy img-responsive" src="{{asset('uploads/movie/'.$hot->image)}}" alt="{{$hot->title}}" title="{{$hot->title}}"></figure>
                                     <span class="status">
-                                        @if($hot->resolution==0)
-                                            HD
-                                        @elseif($hot->resolution==1)
-                                            SD 
-                                        @elseif($hot->resolution==2)
-                                            HDCam
-                                        @elseif($hot->resolution==3)
-                                            Cam
-                                        @elseif($hot->resolution==4)
-                                            FullHD
-                                        @else
-                                            Trailer    
-                                        @endif
-                                    </span><span class="episode"><i class="fa fa-play" aria-hidden="true"></i>
-                                        {{$hot->episode_count}}/{{$hot->sotap}} |
                                         @if($hot->phude==0)
-                                            Phụ đề
+                                            Phụ đề 
                                         @else
                                             Thuyết minh
+                                        @endif
+                                    </span><span class="episode"><i class='fa fa-bookmark'></i>
+                                  
+                                        @if($hot->thuocphim=='phimle')
+                                            @if($hot->resolution==0)
+                                            HD
+                                            @elseif($hot->resolution==1)
+                                                SD 
+                                            @elseif($hot->resolution==2)
+                                                HDCam
+                                            @elseif($hot->resolution==3)
+                                                Cam
+                                            @elseif($hot->resolution==4)
+                                                FullHD
+                                            @else
+                                                Trailer    
+                                            @endif   
+                                        @else
+                                            {{$hot->episode_count}}/{{$hot->sotap}} 
                                         @endif
                                     </span> 
                                     <div class="icon_overlay"></div>
@@ -307,12 +426,93 @@
                         var owl = $('#halim_related_movies-2');
                         owl.owlCarousel({
                             loop: true,margin: 5,autoplay: true,autoplayTimeout: 4000,autoplayHoverPause: true,nav: true,navText: 
-                                ['<i class="hl-down-open rotate-left"></i>', '<i class="hl-down-open rotate-right"></i>'],responsiveClass: true,responsive: 
-                                    {0: {items:2},480: {items:3}, 600: {items:4},1000: {items: 4}}})});
+                                ['<i class="fa fa-angle-double-left"></i>', '<i class="fa fa-angle-double-right"></i>'],responsiveClass: true,responsive: 
+                                    {
+                                        0: {items:2},
+                                        480: {items:3}, 
+                                        600: {items:5},
+                                        1000: {items: 6}
+                                    }})});
                     </script>
                 </div>
             </section>
         </main>
         @include('FrontEnd.pages.include.sidebar')
+    </div>
+
+    <!-- Modal -->
+    <div class="modal fade" id="Login_or_Register" data-backdrop="static" data-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="card">
+                    <div class="col-md-6">
+                        <div class="card">
+                            <div class="card-body">
+                                <h3 style="color: #18e988;">
+                                    <b> Wellcome GMovie..!</b>
+                                </h3>
+                                <div class="text-center" 
+                                    style="
+                                        margin-top: 25px;
+                                        height: 168px;
+                                        width:160px;
+                                        border-radius:50%;
+                                        background-color: #58d768;
+                                        color: ghostwhite;
+                                        padding-top:25px;
+                                        font-size:20px;        
+                                        ">
+                                        
+                                        <img src="{{asset('uploads/logo/'.$info->logo)}}" width="100%" > 
+                                        Giữ nụ cười của bạn
+                                    <!-- Keep your smile... -->
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-6">
+                        <div class="card">
+                            <div class="card-body">
+                                <h6 class="text-align: center;margin-top: 5px;">Bạn là thành viên mới..!</h6>
+                                <a href="{{route('sign_up')}}" class="btn-block btn-primary text-center" 
+                                    style="
+                                        height:60px;
+                                        width:auto;
+                                        padding-top:12px;
+                                        margin-top:25px;
+                                        font-size:25px; 
+                                        border: 1px solid #faf0e6 !important;
+                                        border-radius: 10px;
+                                        box-shadow: 0 4px 5px 0 rgb(0 0 0 / 10%), 0 2px 4px 0 rgb(0 0 0 / 19%);                                                                                   
+                                        ">
+                                    <span class="mt-5">Đăng ký</span>                                                        
+                                </a>
+                                <h5 class="mt-lg-5 text-center">Hoặc</h5>
+                                <h6 class="text-align: center;margin-top: 5px;" >Bạn có sẵn tai khoản...!</h6>
+                                <a href="{{route('sign_in')}}" class="btn-block btn-success text-center" 
+                                    style="
+                                        height:60px;
+                                        width:auto;
+                                        padding-top:12px;
+                                        margin-top:10px;
+                                        font-size:25px; 
+                                        border: 1px solid #faf0e6 !important;
+                                        border-radius: 10px;
+                                        box-shadow: 0 4px 5px 0 rgb(0 0 0 / 10%), 0 2px 4px 0 rgb(0 0 0 / 19%);  
+                                        ">
+
+                                    <span class="mt-5">Đăng nhập</span>
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
     </div>
 @endsection  

@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Category;
+use App\Models\Comment;
 use App\Models\Country;
 use App\Models\Episode;
 use App\Models\Genre;
@@ -10,9 +11,14 @@ use App\Models\Info;
 use App\Models\Movie;
 use App\Models\Movie_Genre;
 use App\Models\Rating;
+use App\Models\User;
+use Illuminate\Auth\Events\Failed;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Redirect;
+use Illuminate\Support\Facades\Session;
+use Illuminate\Support\Facades\Validator;
 
 class IndexController extends Controller
 {
@@ -61,7 +67,7 @@ class IndexController extends Controller
         $meta_description = $info->description;
         $meta_image = '';
 
-        $Category_home = Category::with(['movie' => function($q){$q->withCount('episode')->where('status',1);} ])->orderBy('id','DESC')->where('status', 1)->get();
+        $Category_home = Category::with(['movie' => function($q){$q->withCount('episode')->where('status',1);} ])->orderBy('id','ASC')->where('status', 1)->get();
         return view('FrontEnd.pages.home',compact('Category_home','meta_title', 'meta_description', 'meta_image'));
     }
 
@@ -152,9 +158,9 @@ class IndexController extends Controller
     public function watch($slug,$tap){
         $movie = Movie::with('category','genre','country', 'movie_genre','episode')->where('slug', $slug)->where('status', 1)->first();         
         
-        $meta_title = 'Xem phim: '.$movie->title;
-        $meta_description = $movie->description;
-        $meta_image = url('uploads/movie/'.$movie->image);
+        // $meta_title = 'Xem phim: '.$movie->title;
+        // $meta_description = $movie->description;
+        // $meta_image = url('uploads/movie/'.$movie->image);
 
         $related = Movie::with('category','genre','country')->where('category_id',$movie->category->id)
             ->orderBy(DB::raw('RAND()'))
@@ -170,7 +176,7 @@ class IndexController extends Controller
             $episode = Episode::where('movie_id',$movie->id)->where('episode',$tapphim)->first();
         }
         
-        return view('FrontEnd.pages.watch' ,compact('movie', 'episode', 'tapphim', 'related','meta_title', 'meta_description', 'meta_image'));
+        return view('FrontEnd.pages.watch' ,compact('movie', 'episode', 'tapphim', 'related'));
     }
     
     public function episode(){
@@ -193,5 +199,85 @@ class IndexController extends Controller
             echo 'done';
         }
     }
+
+    public function reply_comment(Request $request){
+        $data = $request->all();
+        $comment = new Comment();
+        $comment->comment = $data['comment'];
+        $comment->comment_movie_id = $data['comment_movie_id'];
+        $comment->comment_parent_comment = $data['comment_id'];
+        $comment->comment_status = 0;
+        $comment->comment_name = 'Sokunthea-GMovie';
+        $comment->save();
+
+    }
+    public function allow_comment(Request $request){
+        $data = $request->all();
+        $comment = Comment::find($data['comment_id']);
+        $comment->comment_status = $data['comment_status'];
+        $comment->save();
+    }
+    public function list_comment(){
+        $comment = Comment::with('movie')->where('comment_parent_comment','=',0)->orderBy('id','DESC')->get();
+        $comment_rep = Comment::with('movie')->where('comment_parent_comment','>',0)->get();
+        return view('BackEnd.comment.index', compact('comment', 'comment_rep'));
+    }
+    public function send_comment(Request $request){
+        $movie_id = $request->movie_id;
+        $comment_name = $request->comment_name;
+        $comment_content = $request->comment_content;
+        $comment = new Comment();
+        $comment->comment = $comment_content;
+        $comment->comment_name = $comment_name;
+        $comment->comment_movie_id = $movie_id;
+        $comment->comment_status = 1;
+        $comment->comment_parent_comment = 0;
+        $comment->save();
+    }
+    public function load_comment(Request $request){
+        $movie_id = $request->movie_id;
+        $comment = Comment::where('comment_movie_id',$movie_id)->where('comment_parent_comment','=',0)->where('comment_status',0)->get();
+        $comment_rep = Comment::with('movie')->where('comment_parent_comment','>',0)->get();
+        $output = '';
+        foreach($comment as $key => $comm){
+            $output.= ' 
+                <div class="row style_comment">
+                    <div class="col-md-1">
+                        <img width="120%" src="'.url('/images/customer.jpg').'" class="img img-responsive img-thumbnail">
+                    </div>
+                    <div class="col-md-10">
+                        <p style="color:#44e014;">@'.$comm->comment_name.' <b style="color:#000;font-size:8px;">('.$comm->comment_date.')</b></p>
+                        <p>'.$comm->comment.'</p>
+                    </div>
+
+                </div><p></p>
+            ';
+
+            foreach($comment_rep as $key => $rep_comment)  {
+                if($rep_comment->comment_parent_comment==$comm->id)  {
+                $output.= ' <div class="row style_comment" style="margin:5px 40px;background: #6289d2;">
+
+                <div class="col-md-1">
+                    <img width="100%" src="'.url('/images/OIP.jpg').'" class="img img-responsive img-thumbnail">
+                </div>
+                <div class="col-md-10">
+                    <p style="color:#fff200;">@Admin <b style="color:#000;font-size:8px;">('.$comm->comment_date.')</b></p>
+                    <p style="color:#fff;">'.$rep_comment->comment.'</p>
+                    <p></p>
+                </div>
+                </div><p></p>';
+                }
+            }
+        }
+        echo $output;
+
+    }
+    public function delete_comment($id){
+        Comment::find($id)->delete();
+        toastr()->success('Thành công','Xóa bình luận thành công.');
+        return redirect()->back();
+    }  
+    
+   
 
 }

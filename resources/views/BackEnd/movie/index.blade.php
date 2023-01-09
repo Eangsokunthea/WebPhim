@@ -7,8 +7,9 @@
   
     <div class="card-body">
         <a href="{{route('movie.create')}}" class="btn btn-primary">Thêm phim</a>
+        <a href="{{route('danh_gia')}}" class="btn btn-info">đánh gia phim</a>
 
-        <h3 class="text-center">Quản lý phim</h3>
+        <h3 class="text-center">QUẢN LÝ PHIM</h3>
         
         <table id="example1" class="table table-bordered table-striped">
             <thead>
@@ -21,19 +22,19 @@
                     <!-- <th>Trailer</th> -->
                     <!-- <th>Tên tiếng anh</th> -->
                     <th>Hình ảnh</th>
-                    <!-- <th>Phim Hot</th> -->
+                    <th>Phim Hot</th>
                     <!-- <th>Định dạng</th> -->
-                    <!-- <th>Phụ đề</th> -->
+                    <th>Phụ đề</th>
                     <!-- <th>Mô tả</th> -->
                     <!-- <th>Slug</th> -->
                     <!-- <th>Trạng thái</th> -->
-                    <th>Danh mục</th>
+                    <!-- <th>Danh mục</th> -->
                     <!-- <th>Thuộc Phim</th> -->
-                    <th>Quốc gia</th>
+                    <!-- <th>Quốc gia</th> -->
                     <th>Thẻ loại</th>
                     <th>Số tập</th>
                     <!-- <th>Ngày tạo</th> -->
-                    <th>Ngày cập nhật</th>
+                    <!-- <th>Ngày cập nhật</th> -->
                     <th>Năm phim</th>
                     <th>Top view</th>
                     <!-- <th>Season</th> -->
@@ -46,7 +47,7 @@
                 <tr>
                     <td>{{$i++}}</td>
                     <td>{{$cate->title}}</td>
-                    <td><a href="{{route('add-episode',[$cate->id])}}" class="btn btn-danger btn-sm">Thêm tập phim</a></td>
+                    <td><a href="{{route('add-episode',[$cate->id])}}" class="btn btn-danger btn-xs">Thêm tập</a></td>
                     <!-- <td>
                         @if($cate->tags!=NULL)
                             {{substr($cate->tags,0,50)}}...
@@ -58,12 +59,12 @@
                     <!-- <td>{{$cate->trailer}}</td> -->
                     <!-- <td>{{$cate->name_eng}}</td> -->
                     <td>
-                        <img src="{{asset('uploads/movie/'.$cate->image)}}" width="90">
+                        <img src="{{asset('uploads/movie/'.$cate->image)}}" width="40">
                         <input type="file" id="file-{{$cate->id}}" data-movie_id="{{$cate->id}}" class="form-control-file file_image" accept="image/*">
                         <span id="success_image"></span>
                     </td>
                     
-                    <!-- <td>    
+                    <td>    
                         <select id="{{$cate->id}}" class="form-control phimhot_choose">
                             @if($cate->phim_hot==0)
                                 <option value="1">Hot</option>
@@ -73,7 +74,7 @@
                                 <option value="0">Không</option>
                             @endif
                         </select>
-                    </td> -->
+                    </td>
                     <!-- <td>
                         @if($cate->resolution==0)
                             HD
@@ -91,7 +92,7 @@
                     </td> -->
                     
                     
-                    <!-- <td>    
+                    <td>    
                         <select id="{{$cate->id}}" class="form-control phude_choose">
                             @if($cate->phude==0)
                                 <option value="1">Thuyết minh</option>
@@ -101,7 +102,7 @@
                                 <option value="0">Phụ đề</option>
                             @endif
                         </select>
-                    </td> -->
+                    </td>
                     <!-- <td>{{$cate->description}}</td> -->
                     <!-- <td>{{$cate->slug}}</td> -->
                    
@@ -116,9 +117,9 @@
                             @endif
                         </select>
                     </td> -->
-                    <td>
+                    <!-- <td>
                         {!! Form::select('category_id', $category , isset($cate) ? $cate->category->id : '', ['class'=>'form-control category_choose', 'id'=> $cate->id]) !!}
-                    </td>
+                    </td> -->
                     <!-- <td>    
                         <select id="{{$cate->id}}" class="form-control thuocphim_choose">
                             @if($cate->thuocphim=='phimbo')
@@ -130,26 +131,26 @@
                             @endif
                         </select>
                     </td> -->
-                    <td>
+                    <!-- <td>
                         {!! Form::select('country_id', $country , isset($cate) ? $cate->country->id : '', ['class'=>'form-control country_choose', 'id'=> $cate->id]) !!}
-                    </td>
+                    </td> -->
                     <td>
                         @foreach($cate->movie_genre as $gen)
                             <span class="badge badge-dark">{{$gen->title}}</span>
                         @endforeach
                     </td>
-                    <td>{{$cate->episode_count}}/{{$cate->sotap}}tập</td>
+                    <td><span class="badge badge-success">{{$cate->episode_count}}/{{$cate->sotap}}tập</span></td>
                     <!-- <td>{{$cate->ngaytao}}</td> -->
-                    <td>{{$cate->ngaycapnhat}}</td>
+                    <!-- <td>{{$cate->ngaycapnhat}}</td> -->
                     <td>
                         <form method="POST">
                             @csrf 
-                            {!! Form::selectYear('year',2000,2022, isset($cate->year) ? $cate->year : '', ['class'=>'select-year', 'id'=>$cate->id,'placeholder'=>'--Năm phim--']) !!}
+                            {!! Form::selectYear('year',2000,2022, isset($cate->year) ? $cate->year : '', ['class'=>'select-year form-control', 'id'=>$cate->id,'placeholder'=>'--Năm phim--']) !!}
                         </form>
                         
                     </td>
                     <td>
-                        {!! Form::select('topview', ['0'=>'Ngày', '1'=>'Tuần','2'=>'Tháng'], isset($cate->topview) ? $cate->topview : '', ['class'=>'select-topview', 'id'=>$cate->id,'placeholder'=>'--View--']) !!}
+                        {!! Form::select('topview', ['0'=>'Ngày', '1'=>'Tuần','2'=>'Tháng'], isset($cate->topview) ? $cate->topview : '', ['class'=>'select-topview form-control', 'id'=>$cate->id,'placeholder'=>'--View--']) !!}
                     </td>
 
                     <!-- <td>
@@ -161,18 +162,8 @@
 
                     </td> -->
                     <td>
-                        {!! Form::open(['method'=>'DELETE','route'=>['movie.destroy',$cate->id],'onsubmit'=>'return confirm("Xóa hay không?")']) !!}
-                            {!! Form::submit('Xóa', ['class'=>'btn btn-danger']) !!}
-                        {!! Form::close() !!}
-                        
-                        <a href="{{route('movie.edit',$cate->id)}}"class="btn btn-warning">Sửa</a>
-                        <!-- <a data-toggle="modal" data-target="#movie_modal">
-                            <i class="fa fa-eye" style="color: #2196f3;"></i>
-                        </a> -->
-                        <!-- <button type="button" value="{{$cate->id}}" class="btn btn-primary editbtn btn-sm">Edit</button> -->
-                        <!-- <a href="" class="btn btn-sm btn-primary"><i class="la la-pencil"></i></a>
-                        <a href="" class="btn btn-sm btn-danger"><i class="la la-trash-o"></i></a> -->
-
+                        <a href="{{route('movie.edit',$cate->id)}}" class="active btn btn-info btn-sm" style="font-size: 10px;" ><i class="fa fa-edit" title="click to change it"></i></a>
+                        <a href="{{route('delete_movie', ['id'=>$cate->id])}}" class="btn btn-danger btn-sm" id="delete" style="font-size: 10px;"><i class="fas fa-trash-alt" title="click to destroy"></i></a>  
                     </td>
                 </tr>
               @endforeach

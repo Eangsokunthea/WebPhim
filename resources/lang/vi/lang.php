@@ -7,4 +7,6 @@ return [
     'year' => 'Năm phim',
     'category' => 'Danh mục',
     'language' => 'Ngôn ngữ',
+    'vietnam' => 'Việt Nam',
+    'AdminName' => 'Admin Web Xem Phim',
 ];

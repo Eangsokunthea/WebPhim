@@ -25,4 +25,9 @@ class HomeController extends Controller
     {
         return view('BackEnd.Home.home');
     }
+    public function contact()
+    {
+        return view('BackEnd.Home.contact');
+    }
+
 }
