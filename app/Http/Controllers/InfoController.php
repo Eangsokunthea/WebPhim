@@ -43,16 +43,25 @@ class InfoController extends Controller
                 'title' => 'required|max:255',
                 'image' => 'image|mimes:jpg,png,ipeg,gif,svg|max:2048|dimensions:min_width=100, min_height=100,max_width=2000,max_height=2000',
                 'description' => 'required',
+                'name' => 'required',
+                'email' => 'required',
+                'phoneNum' => 'required',
                 'copyright' => 'required|max:255',
             ],
             [
-                'title.required' => 'Tên info phải có',
+                'name.required' => 'Tên phải có',
+                'phoneNum.required' => 'Số điện thoại phải có',
+                'email.required' => 'Email phải có',
+                'title.required' => 'Title info phải có',
                 'description.required' => 'Mô tả info phải có',
                 'hinhanh.required' => 'Hình ảnh info phải có',
                 'copyright.required' => 'Copyright phải có',
             ]
         );
         $info = new Info();
+        $info->name = $data['name'];
+        $info->phoneNum = $data['phoneNum'];
+        $info->email = $data['email'];
         $info->title = $data['title'];
         $info->description = $data['description'];
         $info->copyright = $data['copyright'];
@@ -111,9 +120,15 @@ class InfoController extends Controller
                 'title' => 'required|max:255',
                 'image' => 'image|mimes:jpg,png,ipeg,gif,svg|max:2048|dimensions:min_width=100, min_height=100,max_width=2000,max_height=2000',
                 'description' => 'required',
+                'name' => 'required',
+                'phoneNum' => 'required',
+                'email' => 'required',
                 'copyright' => 'required|max:255',
             ],
             [
+                'name.required' => 'Tên phải có',
+                'phoneNum.required' => 'Số điện thoại phải có',
+                'email.required' => 'Email phải có',
                 'title.required' => 'Tên info phải có',
                 'description.required' => 'Mô tả info phải có',
                 'hinhanh.required' => 'Hình ảnh info phải có',
@@ -121,6 +136,9 @@ class InfoController extends Controller
             ]
         );
         $info = Info::find($id);
+        $info->name = $data['name'];
+        $info->phoneNum = $data['phoneNum'];
+        $info->email = $data['email'];
         $info->title = $data['title'];
         $info->description = $data['description'];
         $info->copyright = $data['copyright'];

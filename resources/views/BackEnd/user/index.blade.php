@@ -21,6 +21,7 @@
             <tbody class="order_position">
             @php($i = 1)
                 @foreach($list as $key => $cate)
+                <tr>
                     <td>{{$i++}}</td>
                     <td>{{$cate->name}}</td>
                     <td>{{$cate->email}}</td>

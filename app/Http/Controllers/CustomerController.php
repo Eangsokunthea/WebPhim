@@ -116,6 +116,7 @@ class CustomerController extends Controller
         $categories = Category::where('status', 1)->get();
         return view('FrontEnd.pages.customer.register', compact('categories'));
     }
+    
     public function store_register(Request $request){
         $customer = new Customer();
         $customer->name = $request->name; 
@@ -154,4 +155,5 @@ class CustomerController extends Controller
 
         return redirect('/');
     }
+    
 }

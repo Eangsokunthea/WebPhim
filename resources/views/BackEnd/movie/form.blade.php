@@ -39,6 +39,7 @@
                         {!! Form::text('slug',isset($movie) ? $movie->slug : '', ['class'=>'form-control','placeholder'=>'Nhập vào dữ liệu...','id'=>'convert_slug']) !!}
                     </div>
                 </div>
+                
                 <div class="col-sm-3">
                     <div class="form-group">
                         {!! Form::label('sotap','Số tập', []) !!}

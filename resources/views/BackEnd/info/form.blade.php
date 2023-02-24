@@ -23,14 +23,32 @@
         <div class="row">
             <div class="col-sm-4">
                 <div class="form-group">
+                    {!! Form::label('name','Tên', []) !!}
+                    {!! Form::text('name',isset($info) ? $info->name : '', ['class'=>'form-control','placeholder'=>'Nhập vào dữ liệu...']) !!}
+                </div>
+            </div>
+            <div class="col-sm-4">
+                <div class="form-group">
+                    {!! Form::label('phoneNum','Số điện thoại', []) !!}
+                    {!! Form::text('phoneNum',isset($info) ? $info->phoneNum : '', ['class'=>'form-control','placeholder'=>'Nhập vào dữ liệu...']) !!}
+                </div>
+            </div>
+            <div class="col-sm-4">
+                <div class="form-group">
+                    {!! Form::label('email','Email', []) !!}
+                    {!! Form::text('email',isset($info) ? $info->email : '', ['class'=>'form-control','placeholder'=>'Nhập vào dữ liệu...']) !!}
+                </div>
+            </div>
+            <div class="col-sm-4">
+                <div class="form-group">
                     {!! Form::label('title','Tiêu đề website', []) !!}
-                    {!! Form::text('title',isset($info) ? $info->title : '', ['class'=>'form-control','placeholder'=>'Nhập vào dữ liệu...','id'=>'slug', 'onkeyup' => 'ChangeToSlug()']) !!}
+                    {!! Form::text('title',isset($info) ? $info->title : '', ['class'=>'form-control','placeholder'=>'Nhập vào dữ liệu...']) !!}
                 </div>
             </div>
             <div class="col-sm-4">
                 <div class="form-group">
                     {!! Form::label('copyright','Copyright', []) !!}
-                    {!! Form::text('copyright',isset($info) ? $info->copyright : '', ['class'=>'form-control','placeholder'=>'Nhập vào dữ liệu...','id'=>'slug', 'onkeyup' => 'ChangeToSlug()']) !!}
+                    {!! Form::text('copyright',isset($info) ? $info->copyright : '', ['class'=>'form-control','placeholder'=>'Nhập vào dữ liệu...']) !!}
                 </div>
             </div>
             <div class="col-sm-3">

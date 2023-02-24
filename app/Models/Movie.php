@@ -9,6 +9,7 @@ class Movie extends Model
 {
     public $timestamps = false;
     use HasFactory;
+
     public function category(){
         return $this->belongsTo(Category::class, 'category_id');
     }
@@ -29,6 +30,9 @@ class Movie extends Model
     }
     public function rating(){
         return $this->hasMany(Rating::class);
+    }
+    public function order(){
+        return $this->hasMany(Order::class);
     }
 
 

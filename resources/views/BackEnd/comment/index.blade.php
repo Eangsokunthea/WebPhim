@@ -72,7 +72,6 @@
                     <td>{{ \Carbon\Carbon::parse( $comm->comment_date )->format('d/m/Y'); }}</td>
                     <td><a href="{{asset('uploads/movie/'.$comm->movie->image)}}" target="_blank">{{ $comm->movie->title }}</a></td>
                     <td>
-                        <a href="" class="active btn btn-info btn-sm" style="font-size: 10px;"><i class="fa fa-edit" title="click to change it"></i></a>&nbsp;
                         <a href="" class="btn btn-danger btn-sm" id="delete" style="font-size: 10px;"><i class="fas fa-trash-alt" title="click to destroy"></i></a>
                     </td>
                 </tr>

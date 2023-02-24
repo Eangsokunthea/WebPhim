@@ -17,8 +17,8 @@ class CountryController extends Controller
     public function index()
     {
         $list = Country::all();
-        // return view('BackEnd.country.index',compact('list'));
-        return view('BackEnd.country.editCount',compact('list'));
+        return view('BackEnd.country.index',compact('list'));
+        // return view('BackEnd.country.editCount',compact('list'));
     }
 
     /**
@@ -40,37 +40,37 @@ class CountryController extends Controller
      */
     public function store(Request $request)
     {
-        $validator = Validator::make($request->all(), [
-            'title'=> 'required|max:191',
-            'slug'=>'required|max:191',
-            'description'=>'required|max:191',
-            'status'=>'required',
-        ]);
+        // $validator = Validator::make($request->all(), [
+        //     'title'=> 'required|max:191',
+        //     'slug'=>'required|max:191',
+        //     'description'=>'required|max:191',
+        //     'status'=>'required',
+        // ]);
 
-        if($validator->fails())
-        {
-            return response()->json([
-                'status'=>400,
-                'errors'=>$validator->messages()
-            ]);
-        }
-        else
+        // if($validator->fails())
+        // {
+        //     return response()->json([
+        //         'status'=>400,
+        //         'errors'=>$validator->messages()
+        //     ]);
+        // }
+        // else
         
-        {
-            $data = $request->all();
-            $country = new Country();
-            $country->title = $data['title'];
-            $country->slug = $data['slug'];
-            $country->description = $data['description'];
-            $country->status = $data['status'];
-            $country->save();
-            return response()->json([
-                'status'=>200,
-                'message'=>'Student Added Successfully.'
-            ]);
-        }
+        // {
+        //     $data = $request->all();
+        //     $country = new Country();
+        //     $country->title = $data['title'];
+        //     $country->slug = $data['slug'];
+        //     $country->description = $data['description'];
+        //     $country->status = $data['status'];
+        //     $country->save();
+        //     return response()->json([
+        //         'status'=>200,
+        //         'message'=>'Student Added Successfully.'
+        //     ]);
+        // }
 
-        // $data = $request->all();
+        $data = $request->all();
         // $data = $request->validate(
         //     [
         //         'title' => 'required|unique:countries|max:255',
@@ -88,14 +88,14 @@ class CountryController extends Controller
         //     ]
         // );
 
-        // $country = new Country();
-        // $country->title = $data['title'];
-        // $country->slug = $data['slug'];
-        // $country->description = $data['description'];
-        // $country->status = $data['status'];
-        // $country->save();
-        // toastr()->success('Thành công','Thêm quốc gia phim thành công.');
-        // return Redirect::to('/country');
+        $country = new Country();
+        $country->title = $data['title'];
+        $country->slug = $data['slug'];
+        $country->description = $data['description'];
+        $country->status = $data['status'];
+        $country->save();
+        toastr()->success('Thành công','Thêm quốc gia phim thành công.');
+        return Redirect::to('/country');
 
     }
 
@@ -126,17 +126,16 @@ class CountryController extends Controller
      */
     public function edit($id)
     {
-        // $country = Country::find($id);
-        // return view('BackEnd.country.form',compact('country'));
-        
         $country = Country::find($id);
+        return view('BackEnd.country.form',compact('country'));
+        
+        // $country = Country::find($id);
         // if($country)
         // {
-            return response()->json($country);
-            // return response()->json([
-            //     'status'=>200,
-            //     'country'=> $country,
-            // ]);
+        //     return response()->json([
+        //         'status'=>200,
+        //         'country'=> $country,
+        //     ]);
         // }
         // else
         // {
@@ -157,7 +156,7 @@ class CountryController extends Controller
      */
     public function update(Request $request, $id)
     {
-        // $data = $request->all();
+        $data = $request->all();
         // $data = $request->validate(
         //     [
         //         'title' => 'required|unique:countries|max:255',
@@ -174,52 +173,53 @@ class CountryController extends Controller
         //         'status.required' => 'Kícch hoạt quốc gia phải có',
         //     ]
         // );
-        // $country = Country::find($id);
-        // $country->title = $data['title'];
-        // $country->slug = $data['slug'];
-        // $country->description = $data['description'];
-        // $country->status = $data['status'];
-        // $country->save();
-        // toastr()->success('Thành công','Update quốc gia phim thành công.');
-        // return Redirect::to('/country');
-        $validator = Validator::make($request->all(), [
-            'title'=> 'required|max:191',
-            'slug'=>'required|max:191',
-            'description'=>'required|max:191',
-            'status'=>'required',
-        ]);
+        $country = Country::find($id);
+        $country->title = $data['title'];
+        $country->slug = $data['slug'];
+        $country->description = $data['description'];
+        $country->status = $data['status'];
+        $country->save();
+        toastr()->success('Thành công','Update quốc gia phim thành công.');
+        return Redirect::to('/country');
 
-        if($validator->fails())
-        {
-            return response()->json([
-                'status'=>400,
-                'errors'=>$validator->messages()
-            ]);
-        }
-        else
-        {
-            $country = Country::find($id);
-            if($country)
-            {
-                $country->title = $request->input('title');
-                $country->slug = $request->input('slug');
-                $country->description = $request->input('description');
-                $country->status = $request->input('status');
-                $country->update();
-                return response()->json([
-                    'status'=>200,
-                    'message'=>'Cập nhật quốc gia thành công.'
-                ]);
-            }
-            else
-            {
-                return response()->json([
-                    'status'=>404,
-                    'message'=>'Không tìm thấy quốc gia nào.'
-                ]);
-            }
+        // $validator = Validator::make($request->all(), [
+        //     'title'=> 'required|max:191',
+        //     'slug'=>'required|max:191',
+        //     'description'=>'required|max:191',
+        //     'status'=>'required',
+        // ]);
 
-        }
+        // if($validator->fails())
+        // {
+        //     return response()->json([
+        //         'status'=>400,
+        //         'errors'=>$validator->messages()
+        //     ]);
+        // }
+        // else
+        // {
+        //     $country = Country::find($id);
+        //     if($country)
+        //     {
+        //         $country->title = $request->input('title');
+        //         $country->slug = $request->input('slug');
+        //         $country->description = $request->input('description');
+        //         $country->status = $request->input('status');
+        //         $country->update();
+        //         return response()->json([
+        //             'status'=>200,
+        //             'message'=>'Cập nhật quốc gia thành công.'
+        //         ]);
+        //     }
+        //     else
+        //     {
+        //         return response()->json([
+        //             'status'=>404,
+        //             'message'=>'Không tìm thấy quốc gia nào.'
+        //         ]);
+        //     }
+
+        // }
     }
 
     /**

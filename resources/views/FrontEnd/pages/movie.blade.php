@@ -42,35 +42,36 @@
                         </div>
                     </div>
                     <div class="movie_info col-xs-12">
+                        <div class="col-md-2"></div>
                         <div class="movie-poster col-md-3">
                             <img class="movie-thumb" src="{{asset('uploads/movie/'.$movie->image)}}" alt="{{$movie->title}}">
-                        @if(Session::get('id'))
-                            @if($movie->resolution!=5)
-                                @if($episode_current_list_count>0)   
-                                <div class="bwa-content">
-                                    <div class="loader"></div>
-                                    <a href="{{url('xem-phim/'.$movie->slug.'/tap-'.$episode_tapdau->episode)}}" class="bwac-btn">
-                                    <i class="fa fa-play"></i>
-                                    </a>
-                                </div>
-                                @endif
-                            @else
-                                <a href="#watch_trailer" style="display: block;" class="btn btn-primary watch_trailer">Xem Trailer</a>
-                            @endif
-                        @else
-                                @if($movie->resolution!=5)
-                                    @if($episode_current_list_count>0)   
-                                    <div class="bwa-content">
-                                        <div class="loader"></div>
-                                        <a data-toggle="modal" data-target="#Login_or_Register" class="bwac-btn">
-                                        <i class="fa fa-play"></i>
-                                        </a>
-                                    </div>
+                                @if(Session::get('id'))
+                                    @if($movie->resolution!=5)
+                                        @if($episode_current_list_count>0)   
+                                        <div class="bwa-content">
+                                            <div class="loader"></div>
+                                            <a href="{{url('xem-phim/'.$movie->slug.'/tap-'.$episode_tapdau->episode)}}" class="bwac-btn">
+                                            <i class="fa fa-play"></i>
+                                            </a>
+                                        </div>
+                                        @endif
+                                    @else
+                                        <a href="#watch_trailer" style="display: block;" class="btn btn-primary watch_trailer">Xem Trailer</a>
                                     @endif
                                 @else
-                                    <a href="#watch_trailer" style="display: block;" class="btn btn-primary watch_trailer">Xem Trailer</a>
+                                    @if($movie->resolution!=5)
+                                        @if($episode_current_list_count>0)   
+                                        <div class="bwa-content">
+                                            <div class="loader"></div>
+                                            <a data-toggle="modal" data-target="#Login_or_Register" class="bwac-btn">
+                                            <i class="fa fa-play"></i>
+                                            </a>
+                                        </div>
+                                        @endif
+                                    @else
+                                        <a href="#watch_trailer" style="display: block;" class="btn btn-primary watch_trailer">Xem Trailer</a>
+                                    @endif
                                 @endif
-                        @endif
                             
                             
                             <ul class="list-inline rating"  title="Average Rating" style="
@@ -108,12 +109,13 @@
                             <span class="total_rating"  title="Average Rating" style="font-size: 11px;padding-left: 78px;"> Đánh giá : {{$rating}}/{{$count_total}} lượt</span>
 
                         </div>
-                        <div class="film-poster col-md-9">
+                        <div class="film-poster col-md-2">
                             <!-- <h1 class="movie-title title-1" style="display:block;line-height:35px;margin-bottom: -14px;color: #ffed4d;text-transform: uppercase;font-size: 18px;">{{$movie->title}}</h1>
                             <h2 class="movie-title title-2" style="font-size: 12px;">({{$movie->name_eng}})</h2> -->
                             <ul class="list-info-group">
                                 <h1 class="movie-title title-1" style="display:block;line-height:35px;margin-bottom: -14px;color: #ffed4d;text-transform: uppercase;font-size: 18px;">{{$movie->title}}</h1>
                                 <h2 class="movie-title title-2" style="font-size: 12px;">({{$movie->name_eng}})</h2>
+                               
                                 <li class="list-info-group-item"><span>Trạng Thái</span> : <span class="quality">
                                     @if($movie->resolution==0)
                                         HD

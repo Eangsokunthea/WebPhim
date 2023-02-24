@@ -13,6 +13,7 @@ use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\File;
 use Illuminate\Support\Facades\Redirect;
+use Illuminate\Support\Facades\Session;
 use PHPUnit\Framework\Constraint\Count;
 
 class MovieController extends Controller
@@ -319,6 +320,8 @@ class MovieController extends Controller
             $get_image->move('uploads/movie/',$new_image);
             $movie->image = $new_image;
         }
+        Session::put('price', $movie->price);
+        Session::put('free_price', $movie->free_price);
 
         $movie->save();
         //them the loai cho phim
@@ -453,7 +456,6 @@ class MovieController extends Controller
     public function danh_gia(){
         $list = Rating::with('movie')->orderBy('id', 'DESC')->get();
         $movie = Movie::pluck('title', 'id');
-
         return view('BackEnd.rating.index',compact('list', 'movie'));
     }
     

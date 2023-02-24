@@ -38,6 +38,9 @@ Route::get('/tag/{tag}', [App\Http\Controllers\IndexController::class, 'tag']);
 Route::get('/tim-kiem', [App\Http\Controllers\IndexController::class, 'timkiem'])->name('tim-kiem');
 Route::get('/locphim', [App\Http\Controllers\IndexController::class, 'locphim'])->name('locphim');
 Route::post('/add-rating', [App\Http\Controllers\IndexController::class, 'add_rating'])->name('add-rating');
+Route::get('/thongtinCustomer', [App\Http\Controllers\IndexController::class, 'thongtinCustomer'])->name('thongtin_Cus');
+Route::get('/lienhetoi', [App\Http\Controllers\IndexController::class, 'lienhe'])->name('lienhe_toi');
+
 
 //login and register customer
 Route::get('/register/customer', [App\Http\Controllers\customerController::class, 'register'])->name('sign_up');
@@ -46,6 +49,7 @@ Route::get('/login/customer', [App\Http\Controllers\customerController::class, '
 Route::post('/check/customer/login', [App\Http\Controllers\customerController::class, 'store_login'])->name('store_customer_login');
 Route::post('/logout/customer', [App\Http\Controllers\customerController::class, 'logout'])->name('sign_out');
 
+
 // comment 
 Route::get('/comment', [App\Http\Controllers\IndexController::class, 'list_comment'])->name('list_comment');
 Route::post('/load-comment', [App\Http\Controllers\IndexController::class, 'load_comment'])->name('load_comment');
@@ -53,8 +57,14 @@ Route::post('/send-comment', [App\Http\Controllers\IndexController::class, 'send
 Route::post('/allow-comment', [App\Http\Controllers\IndexController::class, 'allow_comment'])->name('allow_comment');
 Route::post('/reply-comment', [App\Http\Controllers\IndexController::class, 'reply_comment'])->name('reply_comment');
 
+//doi mat kau
+Route::get('/send-mail', [App\Http\Controllers\IndexController::class, 'send_mail']);
+Route::get('/quen-mat-khau', [App\Http\Controllers\IndexController::class, 'quen_mat_khau']);
+Route::get('/update-new-pass', [App\Http\Controllers\IndexController::class, 'update_new_pass']);
+Route::post('/recover-pass', [App\Http\Controllers\IndexController::class, 'recover_pass']);
+Route::post('/reset-new-pass', [App\Http\Controllers\IndexController::class, 'reset_new_pass']);
 
-// Route::post('comments', [App\Http\Controllers\IndexController::class, 'store_comments']);
+Route::post('comments', [App\Http\Controllers\IndexController::class, 'store_comments']);
 
 
 

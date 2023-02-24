@@ -23,6 +23,9 @@
             <thead>
                 <tr>
                     <th>#</th>
+                    <th>Họ Tên</th>
+                    <th>Số điện thoại</th>
+                    <th>Email</th>
                     <th>Tiêu Đề</th>
                     <th>Copyright</th>
                     <!-- <th>Mô tả</th> -->
@@ -34,6 +37,9 @@
             @php($i = 1)
                 @foreach($list as $key => $cate)
                     <td>{{$i++}}</td>
+                    <td>{{$cate->name}}</td>
+                    <td>{{$cate->phoneNum}}</td>
+                    <td>{{$cate->email}}</td>
                     <td>{{$cate->title}}</td>
                     <td>{{$cate->copyright}}</td>
                     <!-- <td>{{$cate->description}}</td> -->

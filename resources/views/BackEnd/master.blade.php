@@ -571,7 +571,7 @@
                             <td>' + item.slug + '</td>\
                             <td>' + item.description + '</td>\
                             <td><span class="badge badge-success">' + item.status + '</span></td>\
-                            <td><button type="button" value="' + item.id + '" class="btn btn-primary editbtn btn-sm">Edit</button></td>\
+                            <td><button type="button" value="' + item.id + '" class="btn btn-primary edit_country btn-sm">Edit</button></td>\
                             <td><button type="button" value="' + item.id + '" class="btn btn-danger deletebtn btn-sm">Delete</button></td>\
                         \</tr>');
                     });
@@ -624,7 +624,7 @@
             
         });
 
-        $(document).on('click', '.editbtn', function (e) {
+        $(document).on('click', '.edit_country', function (e) {
           e.preventDefault();
           var count_id = $(this).val();
           // alert(count_id);

@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Category;
 use App\Models\Comment;
 use App\Models\Country;
+use App\Models\Customer;
 use App\Models\Episode;
 use App\Models\Genre;
 use App\Models\Info;
@@ -12,6 +13,7 @@ use App\Models\Movie;
 use App\Models\Movie_Genre;
 use App\Models\Rating;
 use App\Models\User;
+use Carbon\Carbon;
 use Illuminate\Auth\Events\Failed;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -19,6 +21,8 @@ use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Redirect;
 use Illuminate\Support\Facades\Session;
 use Illuminate\Support\Facades\Validator;
+use Illuminate\Support\Str;
+use Mail;
 
 class IndexController extends Controller
 {
@@ -278,6 +282,52 @@ class IndexController extends Controller
         return redirect()->back();
     }  
     
-   
+    public function thongtinCustomer(){
+        $customer = Customer::find(Session::get('id'));
+        return view('FrontEnd.pages.thongtincanhan', compact('customer'));
+    }
+    public function lienhe(){
+        return view('FrontEnd.pages.lienhe');
+    }
+
+    public function quen_mat_khau(Request $request){
+
+        return view('FrontEnd.pages.customer.forget_pass'); 
+   }
+
+   public function recover_pass(Request $request){
+        $data = $request->all();
+        $now = Carbon::now('Asia/Ho_Chi_Minh')->format('d-m-Y');
+        $title_mail = "Lấy lại mật khẩu từ Website xem phim free online GMOVE".' '.$now;
+        $customer = Customer::where('email','=',$data['email'])->get();
+        foreach($customer as $key => $value){
+            $customer_id = $value->id;
+        }
+        
+        if($customer){
+            $count_customer = $customer->count();
+            if($count_customer==0){
+                return redirect()->back()->with('error', 'Email chưa được đăng ký để khôi phục mật khẩu');
+            }else{
+                $token_random = Str::random();
+                $customer = Customer::find($customer_id);
+                $customer->customer_token = $token_random;
+                $customer->save();
+                //send mail
+            
+                $to_email = $data['email'];//send to this email
+                $link_reset_pass = url('/update-new-pass?email='.$to_email.'&token='.$token_random);
+            
+                $data = array("name"=>$title_mail,"body"=>$link_reset_pass,'email'=>$data['email']); //body of mail.blade.php
+                
+                Mail::send('FrontEnd.pages.customer.forget_pass_notify', ['data'=>$data] , function($message) use ($title_mail,$data){
+                    $message->to($data['email'])->subject($title_mail);//send this mail with subject
+                    $message->from($data['email'],$title_mail);//send from this mail
+                });
+                //--send mail
+                return redirect()->back()->with('message', 'Gửi mail thành công,vui lòng vào email để reset password');
+            }
+        }
+    }
 
 }

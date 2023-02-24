@@ -7,9 +7,10 @@
   
     <div class="card-body">
         <a href="{{route('movie.create')}}" class="btn btn-primary">Thêm phim</a>
-        <a href="{{route('danh_gia')}}" class="btn btn-info">đánh gia phim</a>
+        <a href="{{route('danh_gia')}}" class="btn btn-warning">đánh gia phim</a>
 
-        <h3 class="text-center">QUẢN LÝ PHIM</h3>
+        <!-- <h3 class="text-center">QUẢN LÝ PHIM</h3> -->
+        <h2 class="text-center"><span class="badge badge-info">QUẢN LÝ PHIM</span></h2>
         
         <table id="example1" class="table table-bordered table-striped">
             <thead>
@@ -48,6 +49,7 @@
                     <td>{{$i++}}</td>
                     <td>{{$cate->title}}</td>
                     <td><a href="{{route('add-episode',[$cate->id])}}" class="btn btn-danger btn-xs">Thêm tập</a></td>
+                    
                     <!-- <td>
                         @if($cate->tags!=NULL)
                             {{substr($cate->tags,0,50)}}...

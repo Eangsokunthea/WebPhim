@@ -1733,7 +1733,7 @@ tr.title {
 }
 .film-poster {
     position: relative;
-    width: 72.2%;
+    width: 50%;
     height: auto;
     overflow: hidden;
     padding: 0;

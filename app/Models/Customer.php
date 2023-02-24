@@ -19,5 +19,8 @@ class Customer extends Model
     public function rating(){
         return $this->hasMany(Rating::class);
     }
+    public function order(){
+        return $this->hasMany(Order::class);
+    }
 }
 

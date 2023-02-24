@@ -39,33 +39,29 @@
                 <div class="row mt-5">
                     <div class="col-md-3"></div>
                     <div class="col-md-6">
-                        @if(session()->has('message'))
-                            <div class="alert alert-danger">
-                                <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
-                                <strong>{{session()->get('message')}}</strong>
-                            </div>
-                        @endif
-                        <form action="{{route('store_customer_login')}}" method="post" class="colorlib-form"> 
+						@if(session()->has('message'))
+						<div class="alert alert-success">
+							{!! session()->get('message') !!}
+						</div>
+						@elseif(session()->has('error'))
+						<div class="alert alert-danger">
+							{!! session()->get('error') !!}
+						</div>
+						@endif
+						
+                        <form action="{{url('/recover-pass')}}" method="POST" class="colorlib-form"> 
                         @csrf
-                            <h4 style="color: #291ef0;"><b>ĐĂNG NHẬP</b></h4>
+                            <h4 style="color: #291ef0;"><b>ĐỔI MẬT KHẨU</b></h4>
                             <div class="row mt-3">
                                 <div class="col-md-12">
                                     <div class="form-group">
-                                        <label for="fname">Tài khoản</label>
-                                        <input type="text" name="email" class="form-control" placeholder="Tài khoản">
-                                    </div>
-                                </div>
-                                <div class="col-md-12">
-                                    <div class="form-group">
-                                        <label for="password">Mật khẩu</label>
-                                        <input type="password" name="password" class="form-control" placeholder="Password">
+                                        <label for="fname">Điền email để lấy lại mật khẩu</label>
+										<input type="text" name="email" class="form-control" placeholder="Nhập Tài khoản email..." />
                                     </div>
                                 </div>
                             </div>
-                            <button type="submit" class="btn btn-success">Đăng nhập</button> <a href="{{url('/quen-mat-khau')}}">Bạn quên mật khẩu</a>
-                            
-                            <br><br> Hoặc chưa có tài khoản ?
-                            <a href="{{route('sign_up')}}" >Đăng kí</a>
+							<button type="submit" class="btn btn-info">Gửi mail</button>
+							<a href="{{route('sign_up')}}" >Đăng kí</a> Hoặc <a href="{{route('sign_in')}}" >Đăng nhập</a>
                         </form>
                     </div>
                     <div class="col-md-3"> </div>

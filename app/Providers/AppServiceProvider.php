@@ -16,6 +16,7 @@ use Flasher\Laravel\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\View;
 use Illuminate\Support\ServiceProvider;
+use Illuminate\Support\Facades\Session;
 
 
 class AppServiceProvider extends ServiceProvider
@@ -44,6 +45,8 @@ class AppServiceProvider extends ServiceProvider
         $country = Country::orderBy('id','DESC')->get();
         $phimhot = Movie::withCount('episode')->where('phim_hot', 1)->where('status', 1)->orderBy('ngaycapnhat', 'DESC')->get();
 
+        // $customer = Customer::find(Session::get('id'));
+
         //total admin
         $category_total= Category::all()->count();
         $genre_total= Genre::all()->count();
@@ -64,6 +67,7 @@ class AppServiceProvider extends ServiceProvider
         // $total_users_thisyear = DB::table('tracker_sessions')->where('created_at','>=', Carbon::now('Asia/Ho_Chi_Minh')->subYear())->count();
 
         $info = Info::find(1);
+        // $movi_es = Movie::find(1);
         
         View::share([
             'info' => $info,
@@ -81,6 +85,9 @@ class AppServiceProvider extends ServiceProvider
             'episode_total' => $episode_total,
             'customer_total' => $customer_total,
             'comment_total' => $comment_total,
+
+            // 'customer' => $customer,
+            // 'movi_es' => $movi_es,
 
 
 

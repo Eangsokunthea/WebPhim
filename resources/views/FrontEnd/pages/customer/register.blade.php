@@ -68,8 +68,8 @@
                                 </div>
                                 
                             </div>
-                            <button type="submit" class="btn btn-success">Đăng ký</button>
-
+                            <button type="submit" class="btn btn-success">Đăng kí</button><br><br> Hoặc bạn đã có tài khoản ?
+                            <a href="{{route('sign_in')}}" >Đăng nhập</a>
                         </form>
                     </div>
                     <div class="col-md-3"> </div>

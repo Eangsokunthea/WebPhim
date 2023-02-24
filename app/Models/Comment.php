@@ -11,7 +11,6 @@ class Comment extends Model
     public $timestamps = false;
     protected $fillable = [
         'comment', 'comment_name', 'comment_date','comment_movie_id','comment_parent_comment','comment_status'
-        // 'movie_id', 'customer_id', 'comment_body', 'created_at','user_id'
     ];
     protected $primaryKey = 'id';
     protected $table = 'comments';

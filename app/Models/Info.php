@@ -10,7 +10,7 @@ class Info extends Model
     use HasFactory;
     public $timestamps = false;
     protected $fillable = [
-        'id', 'title', 'description', 'logo'
+        'id','name', 'phoneNum','email', 'title', 'description', 'logo'
     ];
     protected $table = 'info';
 }
