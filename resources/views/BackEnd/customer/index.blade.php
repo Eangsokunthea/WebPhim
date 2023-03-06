@@ -5,7 +5,8 @@
 
 @section('content')
     <div class="card-body">
-        <h3 class="text-center" style="font-weight: 500;">THÔNG TIN KHÁCH HÀNG</h3>
+        <a href="{{route('user.index')}}" class="btn btn-primary">Quản trị viên</a>
+        <h2 class="text-center"><span class="badge badge-info">THÔNG TIN NGƯỜI DÙNG</span></h2>
         <table id="example1" class="table table-bordered table-striped">
             <thead>
                 <tr>

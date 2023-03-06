@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Category;
 use App\Models\Customer;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Redirect;
 use Illuminate\Support\Facades\Session;
 
@@ -136,23 +137,33 @@ class CustomerController extends Controller
         return view('FrontEnd.pages.customer.login', compact('categories'));
     }
     public function store_login(Request $request){
-        $customer = Customer::where('email', $request->email)->first();
-        if(password_verify($request->password, $customer->password))
-        {
-            Session::put('id', $customer->id);
-            Session::put('customer_name', $customer->name);
-            return redirect('/');
-        }
-        else
-        {
-            return redirect('/login/customer')->with('message', 'Your password is Incorrect, Please provide us your correct password.');
+        // $customer = Customer::where('email', $request->email)->first();
+        // if(password_verify($request->password, $customer->password))
+        // {
+        //     Session::put('id', $customer->id);
+        //     Session::put('customer_name', $customer->name);
+        //     return redirect('/');
+        // }
+        // else
+        // {
+        //     return redirect('/login/customer')->with('error', 'Your password is Incorrect, Please provide us your correct password.');
 
+        // }
+        $email = $request->email;
+        $password = md5($request->password);
+        $result = DB::table('customers')->where('email',$email)->where('password',$password)->first();
+
+        if($result){
+            Session::put('id',$result->id);
+        return Redirect::to('/');
+        }else{
+        return Redirect::to('/login/customer');
         }
+        Session::save();
     }
     public function logout(){
         Session::forget('id');
         Session::forget('customer_name');
-
         return redirect('/');
     }
     

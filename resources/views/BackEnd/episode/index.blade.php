@@ -8,7 +8,7 @@
     <div class="card-body">
         <a href="{{route('episode.create')}}" class="btn btn-primary">Thêm Tập Phim</a>
 
-        <h3 class="text-center">QUẢN LÝ TẬP PHIM</h3>
+        <h2 class="text-center"><span class="badge badge-info">QUẢN LÝ TẬP PHIM</span></h2>
         
         <table id="example1" class="table table-bordered table-striped">
             <thead>

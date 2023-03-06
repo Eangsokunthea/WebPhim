@@ -8,7 +8,7 @@
     <div class="card-body">
         <a href="{{route('episode.index')}}" class="btn btn-primary">Liệt kê danh sách tập phim</a>
         <div class="col-md-10">
-            <h3 class="text-center" style="font-weight: 500;">QUẢN LÝ TẬP PHIM</h3>
+            <h2 class="text-center"><span class="badge badge-info">QUẢN LÝ TẬP PHIM</span></h2>
             @if($errors->any())
                 <div class="alert alert-danger">
                     <ul>

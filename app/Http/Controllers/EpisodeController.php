@@ -63,7 +63,7 @@ class EpisodeController extends Controller
             $ep->linkphim = $data['link'];
             $ep->episode = $data['episode'];
             $ep->updated_at = Carbon::now('Asia/Ho_Chi_Minh');
-            $ep->created_at->Carbon::now('Asia/Ho_Chi_Minh')->toDateString();
+            $ep->created_at = Carbon::now('Asia/Ho_Chi_Minh')->toDateString();
             $ep->save(); 
         }
         toastr()->success('Thành công','Thêm tập phim phim thành công.');

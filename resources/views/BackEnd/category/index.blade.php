@@ -19,7 +19,7 @@
         @endif   -->
         
 
-        <h3 class="text-center">QUẢN LÝ DANH MỤC</h3>
+        <h2 class="text-center"><span class="badge badge-info">QUẢN LÝ DANH MỤC</span></h2>
         @if($errors->any())
             <div class="alert alert-danger">
                 <ul>

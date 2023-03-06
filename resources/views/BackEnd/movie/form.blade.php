@@ -9,7 +9,8 @@
         <a href="{{route('movie.index')}}" class="btn btn-primary">Liệt kê phim</a>
         <div class="col-md-10">
 
-            <h3 class="text-center" style="font-weight: 500;">QUẢN LÝ PHIM</h3>
+            <h2 class="text-center"><span class="badge badge-info">QUẢN LÝ PHIM</span></h2>
+
             @if($errors->any())
                 <div class="alert alert-danger">
                     <ul>

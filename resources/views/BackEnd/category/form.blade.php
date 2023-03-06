@@ -10,7 +10,7 @@
     <a href="{{route('category.index')}}" class="btn btn-primary">Liệt kê danh mục</a>
     <div class="col-md-10">
         
-        <h3 class="text-center" style="font-weight: 500;">QUẢN LÝ DANH MỤC</h3>
+        <h2 class="text-center"><span class="badge badge-info">QUẢN LÝ DANH MỤC</span></h2>
         @if($errors->any())
             <div class="alert alert-danger">
                 <ul>

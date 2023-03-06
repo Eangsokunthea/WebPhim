@@ -15,6 +15,9 @@
   <!-- Theme style -->
   <link rel="stylesheet" href="{{asset('/BackEnd')}}/dist/css/adminlte.min.css">
 
+  <!-- style image ajax -->
+  <link href="{{asset('BackEnd/dist/css/ijaboCropTool.min.css')}}" rel="stylesheet">
+
   <!-- Ionicons -->
   <link rel="stylesheet" href="https://code.ionicframework.com/ionicons/2.0.1/css/ionicons.min.css">
   
@@ -88,18 +91,16 @@
 <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 
 <!-- OPTIONAL SCRIPTS AND CHART -->
-<script src="{{asset('/BackEnd')}}/plugins/chart.js/Chart.min.js"></script>
 <script src="{{asset('/BackEnd')}}/dist/js/demo.js"></script>
 <script src="{{asset('/BackEnd')}}/dist/js/pages/dashboard3.js"></script>
 
 <script src="https://canvasjs.com/assets/script/jquery.canvasjs.min.js"></script>
-<!-- <script src="//ajax.googleapis.com/ajax/libs/jquery/1.9.0/jquery.min.js"></script> -->
 <script src="//cdnjs.cloudflare.com/ajax/libs/raphael/2.1.0/raphael-min.js"></script>
 <script src="//cdnjs.cloudflare.com/ajax/libs/morris.js/0.5.1/morris.min.js"></script>
-<!-- <script src="https://code.jquery.com/jquery-3.6.3.min.js" ></script> -->
 
-<!-- <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script> -->
-<!-- <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/js/bootstrap.bundle.min.js"></script> -->
+<!-- style image ajax -->
+<script src="{{asset('/BackEnd/dist/js/ijaboCropTool.min.js')}}"></script>
+
 
 <!-- datepicker -->
 <script src="https://code.jquery.com/ui/1.13.1/jquery-ui.js"></script>
@@ -138,24 +139,29 @@
   });
 </script>
 
-<!-- ajax model -->
-<!-- <script>
-    $(document).ready(function() {
-        $(document).on('click', '.editbtn', function(){
-          var movie_id = $(this).val();
-          $('#editModal').modal('show');
-          $.ajax({
-            url:"/edit-movie/"+movie_id,
-            method:"GET",
-            success:function(response)
-            {
-              console.log(response.movie.title);
-            }
-        });
-
-        });
+<!-- image user ajax -->
+<script>
+    $(document).on('click','#change_picture_btn', function(){
+      $('#admin_image').click();
     });
-</script>   -->
+    $('#admin_image').ijaboCropTool({
+          preview : '.admin_picture',
+          setRatio:1,
+          allowedExtensions: ['jpg', 'jpeg','png'],
+          buttonsText:['CROP','QUIT'],
+          buttonsColor:['#30bf7d','#ee5155', -15],
+          processUrl:'{{ route("adminPictureUpdate") }}',
+          withCSRF:['_token','{{ csrf_token() }}'],
+          onSuccess:function(message, element, status){
+             alert(message);
+          },
+          onError:function(message, element, status){
+            alert(message);
+          }
+       });
+      
+  </script>
+
 
 <!-- danh muc ajax -->
 <script type='text/javascript'>
@@ -656,14 +662,6 @@
 
     
 </script>
-
-<!-- <script>
-
-    $(document).ready(function () {
-        
-    });
-
-</script> -->
 
 
 

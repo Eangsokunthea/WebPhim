@@ -11,7 +11,7 @@
     }
     </style>
     <!-- Default box -->
-    <h2 class="text-center" style="font-weight: 500;">QUẢN LÝ TRANG CHỦ</h2>
+    <h2 class="text-center"><span class="badge badge-info">QUẢN LÝ THÔNG KÊ</span></h2>
     <div class="card card-solid">
         <div class="card-body pb-0">    
             <div class="row">

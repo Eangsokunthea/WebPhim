@@ -9,7 +9,7 @@
     <a href="{{route('genre.index')}}" class="btn btn-primary">Liệt kê thể loại</a>
     <div class="col-md-10">
     
-        <h3 class="text-center" style="font-weight: 500;">QUẢN LÝ THỂ LOẠI</h3>
+        <h2 class="text-center"><span class="badge badge-info">QUẢN LÝ THỂ LOẠI</span></h2>
 
         @if($errors->any())
             <div class="alert alert-danger">

@@ -14,8 +14,8 @@
                 <strong>{{session()->get('message')}}</strong>
             </div>
         @endif 
-        
-        <h3 class="text-center">QUẢN LÝ THỂ LOẠI</h3>
+
+        <h2 class="text-center"><span class="badge badge-info">QUẢN LÝ THỂ LOẠI</span></h2>
         
         <table id="example1" class="table table-bordered table-striped">
             <thead>

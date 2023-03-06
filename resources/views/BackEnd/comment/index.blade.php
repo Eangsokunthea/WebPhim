@@ -7,7 +7,7 @@
   
     <div class="card-body">
 
-        <h3 class="text-center" style="font-weight: 500;">QUẢN LÝ THÔNG TIN BÌNH LUẬN</h3>
+        <h2 class="text-center"><span class="badge badge-info">QUẢN LÝ THÔNG TIN BÌNH LUẬN</span></h2>
         <div id="notify_comment"></div>
         @if($errors->any())
             <div class="alert alert-danger">

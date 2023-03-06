@@ -16,8 +16,7 @@
             </div>
         @endif  
         
-
-        <h3 class="text-center">QUẢN LÝ QUỐC GIA</h3>
+        <h2 class="text-center"><span class="badge badge-info">QUẢN LÝ QUỐC GIA</span></h2>
         
         <table id="example1" class="table table-bordered table-striped">
             <thead>

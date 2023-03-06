@@ -7,7 +7,7 @@
 <div class="card-body">    
     <a href="{{route('customer.index')}}" class="btn btn-primary">Liệt kê</a>
     <div class="col-md-10">
-        <h3 class="text-center" style="font-weight: 500;">QUẢN LÝ KHÁCH HÀNG</h3>
+        <h2 class="text-center"><span class="badge badge-warning">CẬP NHẬT THÔNG TIN NGƯỜI DÙNG</span></h2>
         @if($errors->any())
             <div class="alert alert-danger">
                 <ul>

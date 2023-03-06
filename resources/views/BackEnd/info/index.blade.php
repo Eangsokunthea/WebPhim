@@ -8,7 +8,7 @@
     <div class="card-body">
         <a href="{{route('info.create')}}" class="btn btn-primary">Cập nhập</a>
 
-        <h3 class="text-center" style="font-weight: 500;">QUẢN LÝ THÔNG TIN WEBSITE</h3>
+        <h2 class="text-center"><span class="badge badge-info">QUẢN LÝ THÔNG TIN WEBSITE</span></h2>
         @if($errors->any())
             <div class="alert alert-danger">
                 <ul>
@@ -23,9 +23,9 @@
             <thead>
                 <tr>
                     <th>#</th>
-                    <th>Họ Tên</th>
+                    <!-- <th>Họ Tên</th>
                     <th>Số điện thoại</th>
-                    <th>Email</th>
+                    <th>Email</th> -->
                     <th>Tiêu Đề</th>
                     <th>Copyright</th>
                     <!-- <th>Mô tả</th> -->
@@ -37,9 +37,6 @@
             @php($i = 1)
                 @foreach($list as $key => $cate)
                     <td>{{$i++}}</td>
-                    <td>{{$cate->name}}</td>
-                    <td>{{$cate->phoneNum}}</td>
-                    <td>{{$cate->email}}</td>
                     <td>{{$cate->title}}</td>
                     <td>{{$cate->copyright}}</td>
                     <!-- <td>{{$cate->description}}</td> -->

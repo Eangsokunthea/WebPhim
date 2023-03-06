@@ -51,11 +51,11 @@
 						
                         <form action="{{url('/recover-pass')}}" method="POST" class="colorlib-form"> 
                         @csrf
-                            <h4 style="color: #291ef0;"><b>ĐỔI MẬT KHẨU</b></h4>
+                            <h4 style="color: #291ef0;"><b>QUÊN MẬT KHẨU</b></h4>
                             <div class="row mt-3">
                                 <div class="col-md-12">
                                     <div class="form-group">
-                                        <label for="fname">Điền email để lấy lại mật khẩu</label>
+                                        <label for="fname">Địa chỉ Email</label>
 										<input type="text" name="email" class="form-control" placeholder="Nhập Tài khoản email..." />
                                     </div>
                                 </div>

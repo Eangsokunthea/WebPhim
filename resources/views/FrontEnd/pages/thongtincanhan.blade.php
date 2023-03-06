@@ -29,7 +29,9 @@
                                     <span class="quality">{{$customer->email}} </span>
                                 </li>
                                 <li class="list-info-group-item"><span>Mật khẩu</span> : 
-                                    <span class="episode">{{$customer->password}} </span>
+                                    <!-- <input type="password" name="password" class="form-control" value="{{$customer->password}}"> -->
+
+                                    <span type="password" class="episode"> {{$customer->password}}</span>
                                 </li>
                                 
                             </ul>

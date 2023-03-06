@@ -55,7 +55,6 @@
       <style>
          #header {
             background: var(--primary-color) !important;
-            /* background: #1b2d3c; */
          }
 
          #timkiem{
@@ -63,38 +62,28 @@
          }
          #get-bookmark{
             background: var(--primary-color);
-            /* color: var(--secondary-color); */
             color: #ffd700;
          }
          #get-bookmark:hover {
             background:#224361; 
-            /* background: var(--primary-color); */
          }
 
         
          .movie_info {  
-            /* background: #00000026; */
-            /* background: #212121; */
             color: var(--secondary-color); 
             background: var(--primary-color);
             
          }
          #wrapper {
-            /* background:#224361;  */
             background: var(--primary-color);
             padding: 0 0 15px;
          }
          .toggles{
-            /* background: var(--primary-color); */
             color: var(--secondary-color); 
-            /* color: #ffd700; */
-            /* background:#224361; */
-            /* background:#224361;  */
             display:inline-block; 
             line-height:20px; 
             padding:6px 15px; 
             border-radius:20px; 
-            /* color:#fff;  */
             cursor:pointer; 
             transition:.4s all; 
             margin-top:1px; 
@@ -105,14 +94,11 @@
          }
        
          .toggles:hover { 
-            /* background:#224361;  */
-            /* background: var(--primary-color); */
             background:#224361; 
          } 
          
          .popular-post .item {
             background: var(--primary-color);
-            /* background: #0b0f15; */
             border: 1px solid #faf0e6 !important;
             border-radius: 6px;
             box-shadow: 0 4px 5px 0 rgb(0 0 0 / 10%), 0 2px 4px 0 rgb(0 0 0 / 19%);
@@ -124,12 +110,6 @@
 
          .halim-panel-filter .panel-heading {
             background: var(--primary-color);
-            /* background: #1821299e; */
-            /* border: 1px solid #faf0e6; */
-            /* border-bottom: 1px solid #1d2731; */
-            /* border-style: solid;
-            border-width: 0px 1px 2px 1px; 
-            border-bottom: 1px solid #faf0e6; */
             border: 1px solid #faf0e6;
             border-radius: 6px;
             box-shadow: 0 4px 5px 0 rgb(0 0 0 / 10%), 0 2px 4px 0 rgb(0 0 0 / 19%);
@@ -137,24 +117,13 @@
          }
 
          ul.list-info-group {
-            /* border: 1px solid #14212d; */
             border: none;
             padding: 12px 10px;
             color: var(--secondary-color);
             background: var(--primary-color);
-            /* border: 1px solid #faf0e6 !important;
-            border-radius: 6px;
-            box-shadow: 0 4px 5px 0 rgb(0 0 0 / 10%), 0 2px 4px 0 rgb(0 0 0 / 19%); */
-            /* background: #00000026;  */
             text-shadow: 0px 0px 0px #000;
             box-shadow: 0 4px 5px 0 rgb(0 0 0 / 10%), 0 0px 0px 0 rgb(0 0 0 / 19%);
-            /*box-shadow: inset 0 1px 1px transparent, 0 1px 10px rgb(0 0 0 / 86%); */
          }
-         /* .bluan {
-            color: var(--secondary-color) !important;
-         } */
-        
-
     
       </style>
       
@@ -242,30 +211,6 @@
          
          <script src="{{asset('/frontEnd/f2/main.js')}}"></script>
          
-         
-         <!-- dark/mode -->
-         <!-- <script>
-            var Mode = document.getElementById("Mode");
-
-            Mode.onclick = function(){
-               document.body.classList.toggle("dark");
-               if(document.body.classList.contains("dark")){
-                     Mode.src = "{{asset('/frontEnd/img/Rsun.png')}}"; 
-                    
-
-               }else{
-                     Mode.src = "{{asset('/frontEnd/img/moon.png')}}";
-                     
-               }
-            }
-         </script> -->
-
-         <!-- banner show -->
-         <!-- <script type='text/javascript'>
-            $(window).on('load', function(){
-               $('#banner_quangcao').modal('show');
-            });
-         </script> -->
          
          <script type='text/javascript'>
             $(".watch_trailer").click(function(){

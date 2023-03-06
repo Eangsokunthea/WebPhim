@@ -62,7 +62,8 @@
                                     </div>
                                 </div>
                             </div>
-                            <button type="submit" class="btn btn-success">Đăng nhập</button> <a href="{{url('/quen-mat-khau')}}">Bạn quên mật khẩu</a>
+                            <button type="submit" class="btn btn-success">Đăng nhập</button> 
+                            <a href="{{url('/quen-mat-khau')}}">Bạn quên mật khẩu</a>
                             
                             <br><br> Hoặc chưa có tài khoản ?
                             <a href="{{route('sign_up')}}" >Đăng kí</a>

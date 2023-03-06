@@ -64,8 +64,6 @@ Route::get('/update-new-pass', [App\Http\Controllers\IndexController::class, 'up
 Route::post('/recover-pass', [App\Http\Controllers\IndexController::class, 'recover_pass']);
 Route::post('/reset-new-pass', [App\Http\Controllers\IndexController::class, 'reset_new_pass']);
 
-Route::post('comments', [App\Http\Controllers\IndexController::class, 'store_comments']);
-
 
 
 Auth::routes();
@@ -74,7 +72,6 @@ Auth::routes();
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
 Route::get('/contact', [App\Http\Controllers\HomeController::class, 'contact'])->name('contact');
 Route::get('/rating', [App\Http\Controllers\MovieController::class, 'danh_gia'])->name('danh_gia');
-// Route::get('/users', [App\Http\Controllers\HomeController::class, 'users'])->name('users');
 
 /////
 Route::resource('category', App\Http\Controllers\CategoryController::class);
@@ -92,12 +89,6 @@ Route::resource('customer', App\Http\Controllers\CustomerController::class);
 Route::get('fetch-countries', [App\Http\Controllers\CountryController::class, 'fetchcountry']);
 Route::get('edit-country/{id}', [App\Http\Controllers\CountryController::class, 'edit_country'])->name('edit-country');;
 Route::put('update-country/{id}', [App\Http\Controllers\CountryController::class, 'update_country']);
-// Route::delete('delete-country/{id}', [StudentController::class, 'destroy']);
-// Route::post('/getCountryDetails',[App\Http\Controllers\CountryController::class, 'getCountryDetails'])->name('get.country.details');
-// Route::post('/updateCountryDetails',[App\Http\Controllers\CountryController::class, 'updateCountryDetails'])->name('update.country.details');
-// Route::get('/countries', [App\Http\Controllers\CountryController::class, 'delete'])->name('delete_country');
-
-
 
 //delete ajax
 Route::get('/delete_country/{id}', [App\Http\Controllers\CountryController::class, 'delete'])->name('delete_country');
@@ -129,7 +120,9 @@ Route::get('/phimhot-choose', [App\Http\Controllers\MovieController::class, 'phi
 Route::get('/thuocphim-choose', [App\Http\Controllers\MovieController::class, 'thuocphim_choose'])->name('thuocphim-choose');
 Route::get('/resolution-choose', [App\Http\Controllers\MovieController::class, 'resolution_choose'])->name('resolution-choose');
 Route::post('/update-image-movie-ajax', [App\Http\Controllers\MovieController::class, 'update_image_movie_ajax'])->name('update-image-movie-ajax');
-// Route::get('edit-movie/{id}', [App\Http\Controllers\MovieController::class, 'edit_modal_movie'])->name('edit-movie');
+
+
+Route::post('change-profile-picture',[App\Http\Controllers\UserController::class,'updatePicture'])->name('adminPictureUpdate');
 
 
 Route::get('/create_sitemap', function(){

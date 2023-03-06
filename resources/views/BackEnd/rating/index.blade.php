@@ -14,7 +14,7 @@
             <thead>
                 <tr>
                     <th>#</th>
-                    <th>Tên người dùng</th>
+                    <!-- <th>Tên người dùng</th> -->
                     <th>Tên phim</th>
                     <th>Đánh giá</th>
                     <th>Địa chỉ IP</th>
@@ -27,7 +27,7 @@
                 @foreach($list as $key => $cate)
                 <tr>
                     <td>{{$i++}}</td>
-                    <td>{{$cate->customer->name}}</td>
+                    <!-- <td>$cate->customer->name</td> -->
                     <!-- <td>{{$cate->movie->title}}</td> -->
                     <td><a href="{{asset('uploads/movie/'.$cate->movie->image)}}" target="_blank" style="color: #118156;" >{{ $cate->movie->title }}</a></td>
                     <td>đánh giá <span class="badge badge-success">{{$cate->rating}}/5</span> lượt</td>

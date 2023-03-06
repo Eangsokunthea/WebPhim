@@ -8,7 +8,8 @@
 <div class="card-body">    
     <a href="{{route('info.index')}}" class="btn btn-primary">Liệt kê</a>
     <div class="col-md-10">
-        <h3 class="text-center" style="font-weight: 500;">QUẢN LÝ THÔNG TIN WEBSITE</h3>
+
+        <h2 class="text-center"><span class="badge badge-info">QUẢN LÝ THÔNG TIN WEBSITE</span></h2>
         @if($errors->any())
             <div class="alert alert-danger">
                 <ul>
@@ -21,24 +22,6 @@
         
                 {!! Form::open(['route' => ['info.update',$info->id], 'method'=>'PUT', 'enctype'=>'multipart/form-data']) !!}
         <div class="row">
-            <div class="col-sm-4">
-                <div class="form-group">
-                    {!! Form::label('name','Tên', []) !!}
-                    {!! Form::text('name',isset($info) ? $info->name : '', ['class'=>'form-control','placeholder'=>'Nhập vào dữ liệu...']) !!}
-                </div>
-            </div>
-            <div class="col-sm-4">
-                <div class="form-group">
-                    {!! Form::label('phoneNum','Số điện thoại', []) !!}
-                    {!! Form::text('phoneNum',isset($info) ? $info->phoneNum : '', ['class'=>'form-control','placeholder'=>'Nhập vào dữ liệu...']) !!}
-                </div>
-            </div>
-            <div class="col-sm-4">
-                <div class="form-group">
-                    {!! Form::label('email','Email', []) !!}
-                    {!! Form::text('email',isset($info) ? $info->email : '', ['class'=>'form-control','placeholder'=>'Nhập vào dữ liệu...']) !!}
-                </div>
-            </div>
             <div class="col-sm-4">
                 <div class="form-group">
                     {!! Form::label('title','Tiêu đề website', []) !!}

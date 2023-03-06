@@ -291,11 +291,10 @@ class IndexController extends Controller
     }
 
     public function quen_mat_khau(Request $request){
-
         return view('FrontEnd.pages.customer.forget_pass'); 
    }
 
-   public function recover_pass(Request $request){
+    public function recover_pass(Request $request){
         $data = $request->all();
         $now = Carbon::now('Asia/Ho_Chi_Minh')->format('d-m-Y');
         $title_mail = "Lấy lại mật khẩu từ Website xem phim free online GMOVE".' '.$now;
@@ -329,5 +328,29 @@ class IndexController extends Controller
             }
         }
     }
+
+    public function update_new_pass(Request $request){
+       return view('FrontEnd.pages.customer.new_pass');
+   }
+
+    public function reset_new_pass(Request $request){
+        $data = $request->all();
+        $token_random = Str::random();
+        $customer = Customer::where('email','=',$data['email'])->where('customer_token','=',$data['token'])->get();
+        $count = $customer->count();
+        if($count>0){
+                foreach($customer as $key => $cus){
+                    $customer_id = $cus->id;
+                }
+                $reset = Customer::find($customer_id);
+                $reset->password = md5($data['password']);
+                $reset->customer_token = $token_random;
+                $reset->save();
+                return redirect('/login/customer')->with('message', 'Mật khẩu đã cập nhật mới,vui lòng đăng nhập');
+        }else{
+            return redirect('quen-mat-khau')->with('error', 'Vui lòng nhập lại email vì link đã quá hạn');
+        }
+    }
+    
 
 }

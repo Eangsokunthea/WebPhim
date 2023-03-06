@@ -23,15 +23,15 @@
                                 </li>
                                 
                                 <li class="list-info-group-item"><span>Họ và Tên</span> : 
-                                    <span class="quality">{{$info->name}} </span>
+                                    <span class="quality">@Eang Sokunthea </span>
                                 </li>
 
                                 <li class="list-info-group-item"><span>Số điện thoại</span> : 
-                                    <span class="quality">{{$info->phoneNum}} </span>
+                                    <span class="quality">08884545552 </span>
                                 </li>
 
                                 <li class="list-info-group-item"><span>Liên hệ QC Email</span> : 
-                                    <span class="quality">&#160;{{$info->email}} </span>
+                                    <span class="quality">&#160;sokuntheaeang198@gmail.com </span>
                                 </li>
 
                                 <li class="list-info-group-item"><span>CopyRight </span> : 
