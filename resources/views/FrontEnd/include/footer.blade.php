@@ -16,7 +16,7 @@
                     </div>
                 </div>
                 <div class="widget about col-xs-12 col-sm-4 col-md-2">
-                    <div class="footer-logo" style="padding-left: 80px;">
+                    <div class="footer-logo" style="padding-left: 10px;">
                         Liên hệ QC: <a href="/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail=" bvb  vgb hg bncd vbg cvgb" style="color: #eec10a;">[email&#160;eangsokuntheaeang198@gmail.com]</a>
                     </div>
                 </div>

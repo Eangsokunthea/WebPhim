@@ -19,10 +19,12 @@
                     <th>Tên phim</th>
                     <th>Tập phim</th>
                     <!-- <th>Tags</th> -->
-                    <!-- <th>Thời lượng phim</th> -->
                     <!-- <th>Trailer</th> -->
                     <!-- <th>Tên tiếng anh</th> -->
                     <th>Hình ảnh</th>
+                    <th>Thẻ loại</th>
+                    <th>Thời lượng phim</th>
+                    <th>Số tập</th>
                     <th>Phim Hot</th>
                     <!-- <th>Định dạng</th> -->
                     <th>Phụ đề</th>
@@ -32,8 +34,7 @@
                     <!-- <th>Danh mục</th> -->
                     <!-- <th>Thuộc Phim</th> -->
                     <!-- <th>Quốc gia</th> -->
-                    <th>Thẻ loại</th>
-                    <th>Số tập</th>
+                    
                     <!-- <th>Ngày tạo</th> -->
                     <!-- <th>Ngày cập nhật</th> -->
                     <th>Năm phim</th>
@@ -48,7 +49,7 @@
                 <tr>
                     <td>{{$i++}}</td>
                     <td>{{$cate->title}}</td>
-                    <td><a href="{{route('add-episode',[$cate->id])}}" class="btn btn-danger btn-xs">Thêm tập</a></td>
+                    <td><a href="{{route('add-episode',[$cate->id])}}" class="btn btn-danger btn-xs">+Tập</a></td>
                     
                     <!-- <td>
                         @if($cate->tags!=NULL)
@@ -57,7 +58,6 @@
                             Chưa có từ khóa cho phim
                         @endif
                     </td> -->
-                    <!-- <td>{{$cate->thoiluong}}</td> -->
                     <!-- <td>{{$cate->trailer}}</td> -->
                     <!-- <td>{{$cate->name_eng}}</td> -->
                     <td>
@@ -65,6 +65,13 @@
                         <input type="file" id="file-{{$cate->id}}" data-movie_id="{{$cate->id}}" class="form-control-file file_image" accept="image/*">
                         <span id="success_image"></span>
                     </td>
+                    <td>
+                        @foreach($cate->movie_genre as $gen)
+                            <span class="badge badge-dark">{{$gen->title}}</span>
+                        @endforeach
+                    </td>
+                    <td><span class="badge badge-info">{{$cate->thoiluong}}</span></td>
+                    <td><span class="badge badge-success">{{$cate->episode_count}}/{{$cate->sotap}}tập</span></td>
                     
                     <td>    
                         <select id="{{$cate->id}}" class="form-control phimhot_choose">
@@ -136,12 +143,7 @@
                     <!-- <td>
                         {!! Form::select('country_id', $country , isset($cate) ? $cate->country->id : '', ['class'=>'form-control country_choose', 'id'=> $cate->id]) !!}
                     </td> -->
-                    <td>
-                        @foreach($cate->movie_genre as $gen)
-                            <span class="badge badge-dark">{{$gen->title}}</span>
-                        @endforeach
-                    </td>
-                    <td><span class="badge badge-success">{{$cate->episode_count}}/{{$cate->sotap}}tập</span></td>
+                    
                     <!-- <td>{{$cate->ngaytao}}</td> -->
                     <!-- <td>{{$cate->ngaycapnhat}}</td> -->
                     <td>
@@ -152,7 +154,7 @@
                         
                     </td>
                     <td>
-                        {!! Form::select('topview', ['0'=>'Ngày', '1'=>'Tuần','2'=>'Tháng'], isset($cate->topview) ? $cate->topview : '', ['class'=>'select-topview form-control', 'id'=>$cate->id,'placeholder'=>'--View--']) !!}
+                        {!! Form::select('topview', ['0'=>'Ngày', '1'=>'Tuần','2'=>'Tháng'], isset($cate->topview) ? $cate->topview : '', ['class'=>'select-topview form-control', 'id'=>$cate->id,'placeholder'=>'-View-']) !!}
                     </td>
 
                     <!-- <td>

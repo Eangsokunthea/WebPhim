@@ -525,10 +525,6 @@
         var comment_id = $(this).data('comment_id');
         var comment = $('.reply_comment_'+comment_id).val();
         var comment_movie_id = $(this).data('movie_id');
-
-        // alert(comment);
-        // alert(comment_id);
-        // alert(comment_movie_id);
         
           $.ajax({
                 url:"{{url('/reply-comment')}}",
@@ -550,16 +546,9 @@
     
 </script>
 
-<!-- show  -->
-<script>
-  $(document).on('click','#editbtn', function(){
-    var comment_id = $(this).data('comment_id');
-    alert(comment_id);
-  });
-</script>
 
-<!-- ajax counttry -->
-<script>
+<!-- ajax country -->
+<!-- <script>
     $(document).ready(function(){
       fetchcountry();
         function fetchcountry() {
@@ -641,19 +630,18 @@
               url: "{{url('/country/')}}" + count_id,
               success: function (response) {
                 console.log(response);
-                //  if (response.status == 404) {
-                //       $('#success_message').addClass('alert alert-success');
-                //       $('#success_message').text(response.message);
-                //       $('#editModal').modal('hide');
-                //   } else {
-                //       $('#title').val(response.student.title);
-                //       $('#slug').val(response.student.slug);
-                //       $('#description').val(response.student.description);
-                //       $('#status').val(response.student.status);
-                //       $('#count_id').val(count_id);
-                //   }
+                 if (response.status == 404) {
+                      $('#success_message').addClass('alert alert-success');
+                      $('#success_message').text(response.message);
+                      $('#editModal').modal('hide');
+                  } else {
+                      $('#title').val(response.student.title);
+                      $('#slug').val(response.student.slug);
+                      $('#description').val(response.student.description);
+                      $('#status').val(response.student.status);
+                      $('#count_id').val(count_id);
+                  }
 
-                
               }
           });
 
@@ -661,9 +649,7 @@
     });
 
     
-</script>
-
-
+</script> -->
 
 
 <!-- google translate -->

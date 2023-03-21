@@ -86,9 +86,10 @@ Route::resource('user', App\Http\Controllers\UserController::class);
 Route::resource('customer', App\Http\Controllers\CustomerController::class);
 
 // update ajax
-Route::get('fetch-countries', [App\Http\Controllers\CountryController::class, 'fetchcountry']);
-Route::get('edit-country/{id}', [App\Http\Controllers\CountryController::class, 'edit_country'])->name('edit-country');;
-Route::put('update-country/{id}', [App\Http\Controllers\CountryController::class, 'update_country']);
+// Route::get('fetch-countries', [App\Http\Controllers\CountryController::class, 'fetchcountry']);
+// Route::get('edit-country/{id}', [App\Http\Controllers\CountryController::class, 'edit_country'])->name('edit-country');;
+// Route::put('update-country/{id}', [App\Http\Controllers\CountryController::class, 'update_country']);
+
 
 //delete ajax
 Route::get('/delete_country/{id}', [App\Http\Controllers\CountryController::class, 'delete'])->name('delete_country');

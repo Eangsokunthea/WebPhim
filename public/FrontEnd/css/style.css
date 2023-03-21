@@ -2836,7 +2836,7 @@ tr.title {
 }
 #footer .about {
     padding: 20px;
-    padding-top: 10px;
+    /* padding-top: 10px; */
 }
 .container.footer-columns {
     padding: 0;

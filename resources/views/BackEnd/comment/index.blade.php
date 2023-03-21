@@ -63,8 +63,8 @@
                                 @endforeach
                             </ul>
                             @if($comm->comment_status==0)
-                                <br/><textarea class="form-control reply_comment_{{$comm->id}}" rows="3"></textarea>
-                                <br/><button class="btn btn-default btn-xs btn-reply-comment" data-movie_id="{{$comm->comment_movie_id}}"  data-comment_id="{{$comm->id}}">Trả lời bình luận</button>
+                                <br/><textarea class="form-control reply_comment_{{$comm->id}}" rows="3" style="resize:none;"></textarea>
+                                <br/><button class="btn btn-info btn-xs btn-reply-comment" data-movie_id="{{$comm->comment_movie_id}}"  data-comment_id="{{$comm->id}}">Trả lời bình luận</button>
                             
                             @endif
                             <!-- <button type="button" class="btn btn-primary" data-comment_id="{{$comm->id}}" id="editbtn">show</button> -->
